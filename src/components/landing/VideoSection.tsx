@@ -56,7 +56,7 @@ const VideoSection = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/5 to-transparent animate-pulse"></div>
             </div>
 
-                         {/* Main Content */}
+                         
              <div className="relative z-10 h-full flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 text-center">
                
                {/* Header Text */}
