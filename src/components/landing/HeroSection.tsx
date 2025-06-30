@@ -11,6 +11,7 @@ import playLeft from "../../../public/images/Playleft.png";
 import playRight from "../../../public/images/playRight.png";
 import AnimatedButton from "../ui/AnimatedButton";
 import apiClient from "@/lib/apiClient";
+import { AxiosError } from "axios";
 
 const HeroSection = () => {
   const [email, setEmail] = useState("");
@@ -31,19 +32,22 @@ const HeroSection = () => {
     setMessage("");
 
     try {
-      const response = await apiClient.post('/early-access/signup', {
+      await apiClient.post('/early-access/signup', {
         email: email
       });
       
       setMessage("Successfully signed up for early access! Check your email for confirmation.");
       setEmail("");
-    } catch (error: any) {
+    } catch (error) {
       console.error("Early access signup error:", error);
-      
-      if (error.response?.status === 409) {
-        setMessage("This email is already registered for early access.");
-      } else if (error.response?.status === 400) {
-        setMessage("Please enter a valid email address.");
+      if(error instanceof AxiosError) {
+        if (error.response?.status === 409) {
+          setMessage("This email is already registered for early access.");
+        } else if (error.response?.status === 400) {
+          setMessage("Please enter a valid email address.");
+        } else {
+          setMessage("Something went wrong. Please try again.");
+        }
       } else {
         setMessage("Something went wrong. Please try again.");
       }
