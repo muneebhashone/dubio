@@ -36,7 +36,7 @@ const HeroSection = () => {
         email: email
       });
       
-      setMessage("Successfully signed up for early access! Check your email for confirmation.");
+      setMessage("Successfully signed up for early access!");
       setEmail("");
     } catch (error) {
       console.error("Early access signup error:", error);
