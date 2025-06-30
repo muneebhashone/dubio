@@ -10,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import playLeft from "../../../public/images/Playleft.png";
 import playRight from "../../../public/images/playRight.png";
 import AnimatedButton from "../ui/AnimatedButton";
-import emailjs from "@emailjs/browser";
+import apiClient from "@/lib/apiClient";
 
 const HeroSection = () => {
   const [email, setEmail] = useState("");
@@ -18,10 +18,6 @@ const HeroSection = () => {
   const [message, setMessage] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
 
-  // EmailJS configuration
-  const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || 'service_kjzof7p';
-  const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || 'template_87xmj99';
-  const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || 'LmM-_j9Cdkh4wvADu';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,24 +31,22 @@ const HeroSection = () => {
     setMessage("");
 
     try {
-      // Initialize EmailJS with your public key
-      emailjs.init(PUBLIC_KEY);
-
-      const templateParams = {
-        user_email: email,
-        to_name: "Dubio Team",
-        from_name: email,
-        message: `New waitlist signup from: ${email}`,
-        timestamp: new Date().toISOString(),
-      };
-
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams);
+      const response = await apiClient.post('/early-access/signup', {
+        email: email
+      });
       
-      setMessage("Successfully joined the waitlist! We'll contact you soon.");
+      setMessage("Successfully signed up for early access! Check your email for confirmation.");
       setEmail("");
-    } catch (error) {
-      console.error("EmailJS error:", error);
-      setMessage("Something went wrong. Please try again.");
+    } catch (error: any) {
+      console.error("Early access signup error:", error);
+      
+      if (error.response?.status === 409) {
+        setMessage("This email is already registered for early access.");
+      } else if (error.response?.status === 400) {
+        setMessage("Please enter a valid email address.");
+      } else {
+        setMessage("Something went wrong. Please try again.");
+      }
     } finally {
       setIsLoading(false);
     }
