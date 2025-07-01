@@ -4,8 +4,9 @@ import Image from "next/image";
 import React, { useState } from "react";
 import step1 from "../../../public/images/language.png";
 import step2 from "../../../public/images/bgstep1.png";
-import step3 from "../../../public/images/section3.png";
+import step3 from "../../../public/images/steprenew.png";
 import step from "../../../public/images/step1.png";
+import play from "../../../public/images/Play.gif";
 
 const HowItsWork = () => {
   const [videoUrl, setVideoUrl] = useState("");
@@ -162,13 +163,16 @@ const HowItsWork = () => {
                 platform.
               </p>
             </div>
+            <div className="relative">
             <Image
               src={step3}
               alt="step3"
               width={450}
               height={390}
-              className=""
+              
             />
+            <Image src={play} alt="step3" width={200} height={200} className="absolute top-1/2 left-1/2 -translate-x-1/3 -translate-y-1/2" />
+            </div>
           </div>
         </div>
       </div>
