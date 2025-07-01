@@ -1,14 +1,12 @@
 "use client"
 
 import React, { useState, useRef } from "react";
-import circle1 from "../../../public/images/circle.gif";
+import circle1 from "../../../public/images/youtubeplayer.png";
 import bgwave from "../../../public/images/bgwave.png";
 import Image from "next/image";
-import play from "../../../public/images/Play.gif";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import playLeft from "../../../public/images/Playleft.png";
-import playRight from "../../../public/images/playRight.png";
 import AnimatedButton from "../ui/AnimatedButton";
 import apiClient from "@/lib/apiClient";
 import { AxiosError } from "axios";
@@ -60,10 +58,10 @@ const HeroSection = () => {
     <div className="max-w-[1920px] mx-auto h-max lg:py-0 py-32 lg:h-[100vh] flex items-center relative">
       <Image src={bgwave} alt="Dubio" width={1000} height={500} className="absolute top-20 left-0" />
       <div className="max-w-[85%] mx-auto">
-        <div className="flex flex-col-reverse lg:grid lg:grid-cols-2 lg:gap-40 ">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-40 ">
           <div className="text-center lg:text-start my-auto lg:col-span-1 lg:mt-0 sm:mt-88 mt-52 relative">
            
-            <h1 className="text-white 2xl:text-6xl lg:text-4xl md:text-4xl sm:text-3xl font-bold">
+            <h1 className="text-white 2xl:text-6xl lg:text-4xl md:text-4xl text-3xl font-bold">
               Dub Your Content into Any Language In Your Own Voice
             </h1>
             <p className="text-white md:text-base text-sm font-normal lg:mt-8 mt-4">
@@ -100,7 +98,7 @@ const HeroSection = () => {
           </div>
           <div className="relative max-w-full lg:col-span-1">
             {/* <div className="absolute -z-10 2xl:-top-[420px] -top-[200px] left-[130%] -translate-x-1/2 2xl:w-[2010px] 2xl:h-[1217px] w-[1010px] h-[717px] object-cover"> */}
-            <div className="absolute -z-10 2xl:-top-[420px] -top-[200px] left-[100%] -translate-x-1/2 w-full h-full object-cover">
+            {/* <div className="absolute -z-10 2xl:-top-[420px] -top-[200px] left-[100%] -translate-x-1/2 w-full h-full object-cover">
               <div className="relative">
                 <div className="absolute sm:block hidden top-[50%] 2xl:-left-96 -left-56 z-10 2xl:w-[230px] w-[150px] h-[100px]">
                   <Image src={playLeft} alt="Hero" width={230} height={100} />
@@ -126,7 +124,8 @@ const HeroSection = () => {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
+            <Image src={circle1} alt="AI Video Editor Animation" width={760} height={450}/>
           </div>
         </div>
       </div>
