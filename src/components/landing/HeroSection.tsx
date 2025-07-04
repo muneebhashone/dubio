@@ -55,11 +55,11 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="max-w-[1920px] mx-auto h-max lg:py-0 py-32 lg:h-[100vh] flex items-center relative">
+    <div className="max-w-[1920px] mx-auto h-max lg:py-0 pt-32 pb-10 lg:h-[100vh] flex items-center relative">
       <Image src={bgwave} alt="Dubio" width={1000} height={500} className="absolute top-20 left-0" />
       <div className="max-w-[85%] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-40 ">
-          <div className="text-center lg:text-start my-auto lg:col-span-1 lg:mt-0 sm:mt-88 mt-52 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:gap-40 gap-10 ">
+          <div className="text-center lg:text-start my-auto lg:col-span-1 lg:mt-0 relative">
            
             <h1 className="text-white 2xl:text-6xl lg:text-4xl md:text-4xl text-3xl font-bold">
               Dub Your Content into Any Language In Your Own Voice
