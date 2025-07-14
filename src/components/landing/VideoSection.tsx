@@ -67,34 +67,10 @@ const VideoSection = () => {
                {/* Enhanced Video Placeholder - Increased Size */}
                <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20">
                  
-                 {/* Background Image Placeholder */}
-                 <div className="absolute inset-0 bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900">
-                   {/* You can replace this with an actual image */}
-                                       <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-75"></div>
-                   
-                   {/* Dark overlay for text readability */}
-                   <div className="absolute inset-0 bg-black/50"></div>
-                 </div>
-                 
-                 {/* Content Overlay */}
-                 <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4 text-center">
-                   
-                   {/* Main Headline */}
-                   <h3 className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-6 sm:mb-8 leading-tight max-w-md">
-                     What If Your Voice<br />
-                     <span className="text-purple-400">Could Cross Borders?</span>
-                   </h3>
+              
+               <video src="/images/dubiovideo.mp4" autoPlay loop className="w-full h-full object-cover opacity-75" />
 
-                   {/* Play Button */}
-                   <div className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-gradient-to-br from-[#7C3AED] to-[#6D28D9] rounded-full flex items-center justify-center group hover:from-[#6D28D9] hover:to-[#5B21B6] transition-all duration-300 cursor-pointer shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70 hover:scale-110 mb-6">
-                     {/* Play icon */}
-                     <div className="w-0 h-0 border-l-[18px] sm:border-l-[24px] md:border-l-[28px] border-l-white border-t-[11px] sm:border-t-[14px] md:border-t-[16px] border-t-transparent border-b-[11px] sm:border-b-[14px] md:border-b-[16px] border-b-transparent ml-1 transition-all duration-300"></div>
-                     
-                     {/* Ring effect */}
-                     <div className="absolute inset-0 rounded-full border-2 border-white/20 animate-ping"></div>
-                   </div>
-
-                 </div>
+            
 
                  {/* Bottom CTA Overlay */}
                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
