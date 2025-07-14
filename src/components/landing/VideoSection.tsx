@@ -115,7 +115,7 @@ const VideoSection = () => {
                
                 <video 
                   ref={videoRef}
-                  src="/videos/dubiovideos.mp4" 
+                  src="/images/dubiovideos.mp4" 
                   //muted
                   loop 
                   playsInline
