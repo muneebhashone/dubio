@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import AnimatedButton from "../ui/AnimatedButton";
@@ -6,8 +8,47 @@ import bgwave from "../../../public/images/bgwave.png";
 import bgwaveright from "../../../public/images/bgwaveright.png";
 
 const VideoSection = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showControls, setShowControls] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+        if (entry.isIntersecting && videoRef.current && !isPlaying) {
+          videoRef.current.play().catch(console.error);
+          setIsPlaying(true);
+        } else if (!entry.isIntersecting && videoRef.current) {
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.3 } // Play when 30% of section is visible
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [isPlaying]);
+
+  const togglePlayPause = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        videoRef.current.play().catch(console.error);
+        setIsPlaying(true);
+      }
+    }
+  };
   return (
-    <div className="max-w-[1920px] mx-auto py-10 sm:py-16 lg:py-20 relative overflow-hidden">
+    <div ref={sectionRef} className="max-w-[1920px] mx-auto py-10 sm:py-16 lg:py-20 relative overflow-hidden">
       
       {/* Background Wave Effects - Hidden on mobile for better performance */}
       <div className="absolute inset-0 -z-10 hidden md:block">
@@ -64,11 +105,53 @@ const VideoSection = () => {
                  See Dubio in Action
                </h2>
 
-               {/* Enhanced Video Placeholder - Increased Size */}
-               <div className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20">
-                 
-              
-               <video src="/images/dubiovideo.mp4" autoPlay loop className="w-full h-full object-cover opacity-75" />
+                               {/* Enhanced Video Player with Controls - Increased Size */}
+                <div 
+                  className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20"
+                  onMouseEnter={() => setShowControls(true)}
+                  onMouseLeave={() => setShowControls(false)}
+                >
+                  
+               
+                <video 
+                  ref={videoRef}
+                  src="/images/dubiovideos.mp4" 
+                  //muted
+                  loop 
+                  playsInline
+                  preload="auto"
+                  className={`w-full h-full object-cover transition-opacity duration-500 ${isInView ? 'opacity-75' : 'opacity-50'}`}
+                  onError={(e) => console.error('Video loading error:', e)}
+                  onLoadStart={() => console.log('Video loading started')}
+                  onCanPlay={() => console.log('Video can play')}
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
+                >
+                  {/* Multiple source formats for better compatibility */}
+                  <source src="/images/dubiovideos.mp4" type="video/mp4" />
+                  
+                  {/* Fallback message if video doesn't load */}
+                  Your browser does not support the video tag.
+                </video>
+
+                {/* Play/Pause Control Overlay */}
+                <div 
+                  className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 cursor-pointer ${showControls || !isPlaying ? 'opacity-100' : 'opacity-0'}`}
+                  onClick={togglePlayPause}
+                >
+                  <div className="bg-black/50 backdrop-blur-sm rounded-full p-4 hover:bg-black/70 transition-all duration-200 hover:scale-110">
+                    {isPlaying ? (
+                      // Pause Icon
+                      <div className="flex items-center justify-center space-x-1">
+                        <div className="w-2 h-8 bg-white rounded-sm"></div>
+                        <div className="w-2 h-8 bg-white rounded-sm"></div>
+                      </div>
+                    ) : (
+                      // Play Icon
+                      <div className="w-0 h-0 border-l-[20px] border-l-white border-t-[12px] border-t-transparent border-b-[12px] border-b-transparent ml-1"></div>
+                    )}
+                  </div>
+                </div>
 
             
 
