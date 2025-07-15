@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import AnimatedButton from "../ui/AnimatedButton";
@@ -9,39 +9,30 @@ import bgwaveright from "../../../public/images/bgwaveright.png";
 
 const VideoSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
+  // Play video on button click
+  const handlePlay = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = false;
+      videoRef.current.play();
+    }
+  };
+
+  // Listen for play/pause events to update overlay
   useEffect(() => {
-    const tryPlayVideo = () => {
-      if (videoRef.current) {
-        console.log("Attempting to play video...");
-        videoRef.current
-          .play()
-          .then(() => {
-            console.log("Video playback started successfully.");
-          })
-          .catch((err) => {
-            console.warn("Video playback failed, will retry in 200ms.", err);
-            // Try again after a short delay if play fails
-            setTimeout(tryPlayVideo, 200);
-          });
-      } else {
-        console.log("videoRef.current is null, cannot play video.");
-      }
+    const video = videoRef.current;
+    if (!video) return;
+    const onPlay = () => setIsPlaying(true);
+    const onPause = () => setIsPlaying(false);
+    video.addEventListener('play', onPlay);
+    video.addEventListener('pause', onPause);
+    return () => {
+      video.removeEventListener('play', onPlay);
+      video.removeEventListener('pause', onPause);
     };
-    tryPlayVideo();
   }, []);
 
-  // const togglePlayPause = () => {
-  //   if (videoRef.current) {
-  //     if (isPlaying) {
-  //       videoRef.current.pause();
-  //       setIsPlaying(false);
-  //     } else {
-  //       videoRef.current.play().catch(console.error);
-  //       setIsPlaying(true);
-  //     }
-  //   }
-  // };
   return (
     <div className="max-w-[1920px] mx-auto py-10 sm:py-16 lg:py-20 relative overflow-hidden">
       {/* Background Wave Effects - Hidden on mobile for better performance */}
@@ -106,15 +97,24 @@ const VideoSection = () => {
                 <video
                   ref={videoRef}
                   src="/images/dubiovideos.mp4"
-                  autoPlay
-                  muted
-                  loop
                   playsInline
                   className="w-full h-full object-cover transition-opacity duration-500 opacity-75"
                 >
                   <source src="/images/dubiovideos.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
+                  {/* Custom Play Button Overlay */}
+                  {!isPlaying && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePlay}>
+                      <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                        {/* Play Icon */}
+                        <div
+                          className="w-0 h-0 border-l-[40px] border-l-white border-t-[24px] border-t-transparent border-b-[24px] border-b-transparent"
+                          style={{ marginLeft: '6px' }}
+                        ></div>
+                      </div>
+                    </div>
+                  )}
 
                 {/* Bottom CTA Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
