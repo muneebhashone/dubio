@@ -10,6 +10,7 @@ import bgwaveright from "../../../public/images/bgwaveright.png";
 const VideoSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   // Play video on button click
   const handlePlay = () => {
@@ -91,8 +92,8 @@ const VideoSection = () => {
               {/* Enhanced Video Player with Controls - Increased Size */}
               <div
                 className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20"
-                // onMouseEnter={() => setShowControls(true)}
-                // onMouseLeave={() => setShowControls(false)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
               >
                 <video
                   ref={videoRef}
@@ -103,18 +104,29 @@ const VideoSection = () => {
                   <source src="/images/dubiovideos.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-                  {/* Custom Play Button Overlay */}
-                  {!isPlaying && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePlay}>
-                      <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
-                        {/* Play Icon */}
-                        <div
-                          className="w-0 h-0 border-l-[40px] border-l-white border-t-[24px] border-t-transparent border-b-[24px] border-b-transparent"
-                          style={{ marginLeft: '6px' }}
-                        ></div>
+                {/* Custom Play/Pause Button Overlay */}
+                {!isPlaying && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePlay}>
+                    <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                      {/* Play Icon */}
+                      <div
+                        className="w-0 h-0 border-l-[40px] border-l-white border-t-[24px] border-t-transparent border-b-[24px] border-b-transparent"
+                        style={{ marginLeft: '6px' }}
+                      ></div>
+                    </div>
+                  </div>
+                )}
+                {isPlaying && isHovered && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={() => videoRef.current && videoRef.current.pause()}>
+                    <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                      {/* Pause Icon */}
+                      <div className="flex space-x-2">
+                        <div className="w-3 h-8 bg-white rounded-sm"></div>
+                        <div className="w-3 h-8 bg-white rounded-sm"></div>
                       </div>
                     </div>
-                  )}
+                  </div>
+                )}
 
                 {/* Bottom CTA Overlay */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
