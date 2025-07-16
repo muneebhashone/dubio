@@ -55,9 +55,17 @@ export default function AnimatedButton() {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
+    
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onClick={() => {
+        // Scroll to the footer smoothly
+        const footer = document.querySelector("footer");
+        if (footer) {
+          footer.scrollIntoView({ behavior: "smooth" });
+        }
+      }}
       className="relative overflow-hidden bg-gradient-to-r from-[#5b43ed] to-[#6c30fa] hover:bg-gradient-to-r hover:from-[#4f3ed0] hover:to-[#221358] 
                  w-32 h-10 sm:w-36 sm:h-11 md:w-40 md:h-12 lg:w-44 lg:h-12 xl:w-48 xl:h-12
                  text-white rounded-full font-bold flex items-center justify-center group
@@ -93,5 +101,6 @@ export default function AnimatedButton() {
         )}
       </AnimatePresence>
     </div>
+    
   );
 }
