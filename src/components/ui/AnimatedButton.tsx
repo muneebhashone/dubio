@@ -51,7 +51,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 
-export default function AnimatedButton() {
+export default function AnimatedButton({ onClick }: { onClick?: () => void }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -59,13 +59,7 @@ export default function AnimatedButton() {
     <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onClick={() => {
-        // Scroll to the footer smoothly
-        const footer = document.querySelector("footer");
-        if (footer) {
-          footer.scrollIntoView({ behavior: "smooth" });
-        }
-      }}
+      onClick={onClick}
       className="relative overflow-hidden bg-gradient-to-r from-[#5b43ed] to-[#6c30fa] hover:bg-gradient-to-r hover:from-[#4f3ed0] hover:to-[#221358] 
                  w-32 h-10 sm:w-36 sm:h-11 md:w-40 md:h-12 lg:w-44 lg:h-12 xl:w-48 xl:h-12
                  text-white rounded-full font-bold flex items-center justify-center group

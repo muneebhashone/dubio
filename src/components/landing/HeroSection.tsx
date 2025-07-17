@@ -90,7 +90,7 @@ const HeroSection = () => {
                 </Button>
               </div>
             </form>
-              {message && (
+            {message && (
                 <p className={`mt-4 text-sm ${message.includes("Successfully") ? "text-green-400" : "text-red-400"}`}>
                   {message}
                 </p>

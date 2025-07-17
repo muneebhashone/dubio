@@ -11,12 +11,55 @@ const VideoSection = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [showMobileControls, setShowMobileControls] = useState(false);
+
+  // Detect if device is mobile/touch
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    };
+    checkIsMobile();
+    window.addEventListener('resize', checkIsMobile);
+    return () => window.removeEventListener('resize', checkIsMobile);
+  }, []);
+
+  // Hide mobile controls after delay
+  useEffect(() => {
+    if (showMobileControls && isPlaying) {
+      const timer = setTimeout(() => {
+        setShowMobileControls(false);
+      }, 3000); // Hide after 3 seconds
+      return () => clearTimeout(timer);
+    }
+  }, [showMobileControls, isPlaying]);
 
   // Play video on button click
   const handlePlay = () => {
     if (videoRef.current) {
       videoRef.current.muted = false;
-      videoRef.current.play();
+      setIsPlaying(true); // Immediately set playing state
+      setShowMobileControls(false); // Hide controls when playing starts
+      videoRef.current.play().catch((error) => {
+        console.error('Error playing video:', error);
+        setIsPlaying(false); // Reset if play fails
+      });
+    }
+  };
+
+  // Pause video
+  const handlePause = () => {
+    if (videoRef.current) {
+      setIsPlaying(false); // Immediately set paused state
+      setShowMobileControls(false); // Hide controls after pause
+      videoRef.current.pause();
+    }
+  };
+
+  // Handle mobile screen touch to show controls
+  const handleMobileTouch = () => {
+    if (isMobile && isPlaying) {
+      setShowMobileControls(true);
     }
   };
 
@@ -24,13 +67,28 @@ const VideoSection = () => {
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
+    
+    const onPlay = () => {
+      console.log('Video started playing'); // Debug log
+      setIsPlaying(true);
+    };
+    const onPause = () => {
+      console.log('Video paused'); // Debug log
+      setIsPlaying(false);
+    };
+    const onEnded = () => {
+      console.log('Video ended'); // Debug log
+      setIsPlaying(false);
+    };
+    
     video.addEventListener('play', onPlay);
     video.addEventListener('pause', onPause);
+    video.addEventListener('ended', onEnded);
+    
     return () => {
       video.removeEventListener('play', onPlay);
       video.removeEventListener('pause', onPause);
+      video.removeEventListener('ended', onEnded);
     };
   }, []);
 
@@ -94,6 +152,8 @@ const VideoSection = () => {
                 className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
+                onTouchStart={handleMobileTouch}
+                onClick={handleMobileTouch}
               >
                 <video
                   ref={videoRef}
@@ -107,22 +167,22 @@ const VideoSection = () => {
                 {/* Custom Play/Pause Button Overlay */}
                 {!isPlaying && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePlay}>
-                    <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                    <div className="bg-[#7C3AED] rounded-full md:p-8 p-3 flex items-center justify-center">
                       {/* Play Icon */}
                       <div
-                        className="w-0 h-0 border-l-[40px] border-l-white border-t-[24px] border-t-transparent border-b-[24px] border-b-transparent"
+                        className="w-0 h-0 border-l-[25px] md:border-l-[40px] border-l-white border-t-[14px] md:border-t-[24px] border-t-transparent border-b-[14px] md:border-b-[24px] border-b-transparent"
                         style={{ marginLeft: '6px' }}
                       ></div>
                     </div>
                   </div>
                 )}
-                {isPlaying && isHovered && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={() => videoRef.current && videoRef.current.pause()}>
-                    <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                {isPlaying && ((isMobile && showMobileControls) || (!isMobile && isHovered)) && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePause}>
+                    <div className="bg-[#7C3AED] rounded-full md:p-8 p-4 flex items-center justify-center">
                       {/* Pause Icon */}
                       <div className="flex space-x-2">
-                        <div className="w-3 h-8 bg-white rounded-sm"></div>
-                        <div className="w-3 h-8 bg-white rounded-sm"></div>
+                        <div className="md:w-3 w-1 h-5 md:h-8 bg-white rounded-sm"></div>
+                        <div className="md:w-3 w-1 h-5 md:h-8 bg-white rounded-sm"></div>
                       </div>
                     </div>
                   </div>
@@ -152,7 +212,13 @@ const VideoSection = () => {
               {/* CTA Button */}
               <div className="flex items-center justify-center mb-4 sm:mb-0">
                 <Button className="bg-transparent hover:bg-transparent p-0 scale-90 sm:scale-100">
-                  <AnimatedButton />
+                  <AnimatedButton onClick={() => {
+                // Scroll to the footer smoothly
+                const footer = document.querySelector("footer");
+                if (footer) {
+                  footer.scrollIntoView({ behavior: "smooth" });
+                }
+              }} />
                 </Button>
               </div>
 
