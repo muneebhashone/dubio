@@ -13,6 +13,7 @@ const VideoSection = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [showMobileControls, setShowMobileControls] = useState(false);
+  const [justTouched, setJustTouched] = useState(false);
 
   // Detect if device is mobile/touch
   useEffect(() => {
@@ -34,6 +35,16 @@ const VideoSection = () => {
     }
   }, [showMobileControls, isPlaying]);
 
+  // Reset justTouched flag after short delay
+  useEffect(() => {
+    if (justTouched) {
+      const timer = setTimeout(() => {
+        setJustTouched(false);
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [justTouched]);
+
   // Play video on button click
   const handlePlay = () => {
     if (videoRef.current) {
@@ -50,17 +61,31 @@ const VideoSection = () => {
   // Pause video
   const handlePause = () => {
     if (videoRef.current) {
-      setIsPlaying(false); // Immediately set paused state
-      setShowMobileControls(false); // Hide controls after pause
+      setIsPlaying(false); // Immediately set paused state first
       videoRef.current.pause();
+      setShowMobileControls(false); // Hide controls after pause
     }
   };
 
-  // Handle mobile screen touch to show controls
-  const handleMobileTouch = () => {
+  // Handle mobile screen touch to pause directly
+  const handleMobileTouch = (e: React.TouchEvent) => {
     if (isMobile && isPlaying) {
-      setShowMobileControls(true);
+      e.preventDefault();
+      e.stopPropagation();
+      handlePause(); // Direct pause on touch
     }
+  };
+
+  // Handle container click - for mobile only
+  const handleContainerClick = (e: React.MouseEvent) => {
+    // Only handle clicks on mobile
+    if (isMobile && isPlaying) {
+      e.preventDefault();
+      e.stopPropagation();
+      handlePause();
+      return;
+    }
+    // Desktop: do nothing, let hover handle pause button
   };
 
   // Listen for play/pause events to update overlay
@@ -76,19 +101,19 @@ const VideoSection = () => {
       console.log('Video paused'); // Debug log
       setIsPlaying(false);
     };
-    const onEnded = () => {
-      console.log('Video ended'); // Debug log
-      setIsPlaying(false);
-    };
+    // const onEnded = () => {
+    //   console.log('Video ended'); // Debug log
+    //   setIsPlaying(false);
+    // };
     
     video.addEventListener('play', onPlay);
     video.addEventListener('pause', onPause);
-    video.addEventListener('ended', onEnded);
+    // video.addEventListener('ended', onEnded);
     
     return () => {
       video.removeEventListener('play', onPlay);
       video.removeEventListener('pause', onPause);
-      video.removeEventListener('ended', onEnded);
+      // video.removeEventListener('ended', onEnded);
     };
   }, []);
 
@@ -149,11 +174,11 @@ const VideoSection = () => {
 
               {/* Enhanced Video Player with Controls - Increased Size */}
               <div
-                className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20"
+                className="relative w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-2xl h-[240px] sm:h-full aspect-video bg-gradient-to-br from-[#0a0724] via-[#1a1530] to-[#0a0724] rounded-xl sm:rounded-2xl border border-[#7C3AED]/40 mb-6 sm:mb-8 flex items-center justify-center overflow-hidden shadow-xl sm:shadow-2xl shadow-purple-500/20"
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
-                onTouchStart={handleMobileTouch}
-                onClick={handleMobileTouch}
+                onTouchEnd={handleMobileTouch}
+                onClick={handleContainerClick}
               >
                 <video
                   ref={videoRef}
@@ -176,7 +201,8 @@ const VideoSection = () => {
                     </div>
                   </div>
                 )}
-                {isPlaying && ((isMobile && showMobileControls) || (!isMobile && isHovered)) && (
+                {/* Pause button - Desktop only */}
+                {isPlaying && !isMobile && isHovered && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePause}>
                     <div className="bg-[#7C3AED] rounded-full md:p-8 p-4 flex items-center justify-center">
                       {/* Pause Icon */}
@@ -189,6 +215,7 @@ const VideoSection = () => {
                 )}
 
                 {/* Bottom CTA Overlay */}
+                {!isMobile && (
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 sm:p-6">
                   <div className="text-center">
                     <p className="text-white text-sm sm:text-base font-semibold mb-1">
@@ -199,6 +226,7 @@ const VideoSection = () => {
                     </p>
                   </div>
                 </div>
+                )}
 
                 {/* Enhanced Animated pulse effects - Responsive */}
                 <div className="absolute inset-0 border border-[#7C3AED]/40 sm:border-2 rounded-xl sm:rounded-2xl animate-pulse"></div>
