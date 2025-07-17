@@ -160,7 +160,7 @@ const Header = () => {
             <div className="flex flex-col gap-3">
               {/* Instagram */}
               <Link
-                href="#"
+                href="https://www.instagram.com/dubio.ai"
                 className="flex items-center gap-3 text-white hover:text-gray-300 transition-colors p-3 hover:bg-white/10 rounded-lg"
                 aria-label="Follow us on Instagram"
                 onClick={closeModal}
@@ -178,7 +178,7 @@ const Header = () => {
 
               {/* Facebook */}
               <Link
-                href="#"
+                href="https://www.facebook.com/dubioai"
                 className="flex items-center gap-3 text-white hover:text-gray-300 transition-colors p-3 hover:bg-white/10 rounded-lg"
                 aria-label="Follow us on Facebook"
                 onClick={closeModal}
@@ -196,7 +196,7 @@ const Header = () => {
 
               {/* Twitter */}
               <Link
-                href="#"
+                href="https://x.com/dubioai"
                 className="flex items-center gap-3 text-white hover:text-gray-300 transition-colors p-3 hover:bg-white/10 rounded-lg"
                 aria-label="Follow us on Twitter"
                 onClick={closeModal}
