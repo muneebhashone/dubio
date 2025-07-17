@@ -1,4 +1,7 @@
-import React from "react";
+"use client"
+
+import React, { useState } from "react";
+import apiClient from "@/lib/apiClient";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -6,6 +9,41 @@ import AnimatedButton from "../ui/AnimatedButton";
 import logo from "../../../public/images/mainlogo.png";
 import Image from "next/image";
 const MainFooter = () => {
+  // Add state and logic for email signup
+  const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      setMessage("Please enter your email address");
+      return;
+    }
+    setIsLoading(true);
+    setMessage("");
+    try {
+      await apiClient.post('/early-access/signup', { email });
+      setMessage("Successfully signed up for early access!");
+      setEmail("");
+    } catch (error: unknown) {
+      if (typeof error === 'object' && error !== null && 'response' in error) {
+        const err = error as { response?: { status?: number } };
+        if (err.response?.status === 409) {
+          setMessage("This email is already registered for early access.");
+        } else if (err.response?.status === 400) {
+          setMessage("Please enter a valid email address.");
+        } else {
+          setMessage("Something went wrong. Please try again.");
+        }
+      } else {
+        setMessage("Something went wrong. Please try again.");
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <footer
       className="w-full py-12 md:py-16 lg:py-20"
@@ -28,19 +66,31 @@ const MainFooter = () => {
           </p>
 
           {/* Email Signup */}
-          <div className="relative max-w-sm sm:max-w-md md:max-w-xl md:h-16 lg:h-[70px] mx-auto px-4 sm:px-0">
+          <form onSubmit={handleSubmit} className="relative max-w-sm sm:max-w-md md:max-w-xl md:h-16 lg:h-[70px] mx-auto px-4 sm:px-0">
             <Input
               type="email"
               placeholder="Enter your email address"
-              className="w-full bg-[#2A1F3A]/80 border-[#3D2A50] text-white placeholder:text-gray-300 
+              className="w-full bg-[#2A1F3A] border-[#3D2A50] text-white placeholder:text-gray-300 
                        h-12 sm:h-14 md:h-16 lg:h-[70px] 
                        px-4 sm:px-6 pr-0 md:pr-40 lg:pr-48 
                        rounded-full text-sm sm:text-base md:text-lg"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              disabled={isLoading}
             />
-            <Button className="md:absolute right-5 lg:right-4 h-max top-1/2 md:mt-0 mt-4 md:-translate-y-1/2 bg-transparent hover:bg-transparent p-0">
-              <AnimatedButton />
-            </Button>
-          </div>
+              <Button 
+                  type="submit"
+                  disabled={isLoading}
+                  className="sm:absolute justify-self-center m-auto w-max right-5 lg:right-4 h-max top-1/2 sm:mt-0 mt-4 sm:-translate-y-1/2 bg-transparent hover:bg-transparent p-0"
+                >
+                  <AnimatedButton />
+                </Button>
+          </form>
+          {message && (
+                <p className={`mt-4 text-sm ${message.includes("Successfully") ? "text-green-400" : "text-red-400"}`}>
+                  {message}
+                </p>
+              )}
         </div>
 
         {/* Bottom Section */}

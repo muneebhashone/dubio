@@ -107,22 +107,22 @@ const VideoSection = () => {
                 {/* Custom Play/Pause Button Overlay */}
                 {!isPlaying && (
                   <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={handlePlay}>
-                    <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                    <div className="bg-[#7C3AED] rounded-full md:p-8 p-4 flex items-center justify-center">
                       {/* Play Icon */}
                       <div
-                        className="w-0 h-0 border-l-[40px] border-l-white border-t-[24px] border-t-transparent border-b-[24px] border-b-transparent"
+                        className="w-0 h-0 border-l-[30px] md:border-l-[40px] border-l-white border-t-[18px] md:border-t-[24px] border-t-transparent border-b-[18px] md:border-b-[24px] border-b-transparent"
                         style={{ marginLeft: '6px' }}
                       ></div>
                     </div>
                   </div>
                 )}
                 {isPlaying && isHovered && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={() => videoRef.current && videoRef.current.pause()}>
-                    <div className="bg-[#7C3AED] rounded-full p-8 flex items-center justify-center">
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/40 cursor-pointer z-20" onClick={() =>  videoRef.current && videoRef.current.pause()}>
+                    <div className="bg-[#7C3AED] rounded-full md:p-8 p-4 flex items-center justify-center">
                       {/* Pause Icon */}
                       <div className="flex space-x-2">
-                        <div className="w-3 h-8 bg-white rounded-sm"></div>
-                        <div className="w-3 h-8 bg-white rounded-sm"></div>
+                        <div className="md:w-3 w-2 h-6 md:h-8 bg-white rounded-sm"></div>
+                        <div className="md:w-3 w-2 h-6 md:h-8 bg-white rounded-sm"></div>
                       </div>
                     </div>
                   </div>
@@ -152,7 +152,13 @@ const VideoSection = () => {
               {/* CTA Button */}
               <div className="flex items-center justify-center mb-4 sm:mb-0">
                 <Button className="bg-transparent hover:bg-transparent p-0 scale-90 sm:scale-100">
-                  <AnimatedButton />
+                  <AnimatedButton onClick={() => {
+                // Scroll to the footer smoothly
+                const footer = document.querySelector("footer");
+                if (footer) {
+                  footer.scrollIntoView({ behavior: "smooth" });
+                }
+              }} />
                 </Button>
               </div>
 
