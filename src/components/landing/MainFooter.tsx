@@ -108,6 +108,9 @@ const MainFooter = () => {
             <p className="text-white/70 text-sm md:text-base text-center md:text-left">
               The future of creator voice technology
             </p>
+            <p className="text-white/60 text-xs md:text-sm text-center md:text-left mt-2">
+              20 Collyer Quay, #09-01, 20 Collyer Quay, Singapore 049319
+            </p>
           </div>
 
           {/* Right Side - Social Links */}
