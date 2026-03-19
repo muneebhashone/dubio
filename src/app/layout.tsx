@@ -1,11 +1,20 @@
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Syne, Instrument_Serif } from "next/font/google";
 import "./globals.css";
-
-
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
+  subsets: ["latin"],
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument-serif",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -27,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${montserrat.variable} antialiased bg-[#0a0724]`}
+        className={`${montserrat.variable} ${syne.variable} ${instrumentSerif.variable} antialiased bg-[#0a0724]`}
       >
         {children}
       </body>
