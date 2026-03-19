@@ -265,13 +265,7 @@ const FutureOfVoiceCards = () => {
     false,
     false,
   ]);
-  const cardRefs = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-    useRef(null),
-  ];
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
     const observerOptions = {
@@ -281,8 +275,8 @@ const FutureOfVoiceCards = () => {
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry: IntersectionObserverEntry) => {
-        const cardIndex = cardRefs.findIndex(
-          (ref) => ref.current === entry.target
+        const cardIndex = cardRefs.current.findIndex(
+          (element) => element === entry.target
         );
         if (cardIndex !== -1) {
           setVisibleCards((prev) => {
@@ -299,13 +293,17 @@ const FutureOfVoiceCards = () => {
       observerOptions
     );
 
-    cardRefs.forEach((ref) => {
-      if (ref.current) observer.observe(ref.current);
+    const elements = cardRefs.current.filter(
+      (element): element is HTMLDivElement => element !== null
+    );
+
+    elements.forEach((element) => {
+      observer.observe(element);
     });
 
     return () => {
-      cardRefs.forEach((ref) => {
-        if (ref.current) observer.unobserve(ref.current);
+      elements.forEach((element) => {
+        observer.unobserve(element);
       });
     };
   }, []);
@@ -365,7 +363,13 @@ const FutureOfVoiceCards = () => {
         {/* Cards Container */}
         <div className="space-y-16 md:space-y-24 lg:space-y-32">
           {cardData.map((card, index) => (
-            <div key={index} ref={cardRefs[index]} className="relative">
+            <div
+              key={index}
+              ref={(element) => {
+                cardRefs.current[index] = element;
+              }}
+              className="relative"
+            >
               {/* Background Wave Images - Hidden on mobile for better performance */}
               <div className="absolute inset-0 -z-10 overflow-hidden hidden lg:block">
                 {card.side === "left" ? (

@@ -23,12 +23,10 @@ const HowItsWork = () => {
   const handleUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
     setVideoUrl(url);
-    
+
     if (url) {
       const id = extractVideoId(url);
-      if (id) {
-        setVideoId(id);
-      }
+      setVideoId(id ?? "");
     } else {
       setVideoId("");
     }
@@ -87,10 +85,13 @@ const HowItsWork = () => {
               <div className="bg-gray-900 rounded-lg overflow-hidden mb-4 aspect-video absolute right-0 top-0 lg:-top-10 lg:w-[250px] w-full md:w-full">
                
                   {videoId ? (
-                    <img
+                    <Image
                       src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
                       alt="Video thumbnail"
+                      width={1280}
+                      height={720}
                       className="w-full h-full object-cover"
+                      unoptimized
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-gray-400">
