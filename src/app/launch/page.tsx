@@ -1,4 +1,3 @@
-import LaunchHeader from "@/components/launch/LaunchHeader";
 import LaunchHero from "@/components/launch/LaunchHero";
 import SocialProofBar from "@/components/launch/SocialProofBar";
 import HowItWorks from "@/components/launch/HowItWorks";
@@ -8,7 +7,6 @@ import DemoSection from "@/components/launch/DemoSection";
 import UseCases from "@/components/launch/UseCases";
 import PricingTeaser from "@/components/launch/PricingTeaser";
 import FinalCTA from "@/components/launch/FinalCTA";
-import LaunchFooter from "@/components/launch/LaunchFooter";
 
 export const metadata = {
   title: "Dubio — AI Video Dubbing Platform",
@@ -18,8 +16,7 @@ export const metadata = {
 
 export default function LaunchPage() {
   return (
-    <div className="min-h-screen bg-[#0a0724] text-white overflow-x-clip">
-      <LaunchHeader />
+    <>
       <LaunchHero />
       <SocialProofBar />
       <HowItWorks />
@@ -29,7 +26,6 @@ export default function LaunchPage() {
       <UseCases />
       <PricingTeaser />
       <FinalCTA />
-      <LaunchFooter />
-    </div>
+    </>
   );
 }

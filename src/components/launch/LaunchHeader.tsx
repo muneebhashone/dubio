@@ -1,14 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Features", href: "/launch#features" },
+  { label: "How It Works", href: "/launch#how-it-works" },
+  { label: "Use Cases", href: "/launch/use-cases" },
+  { label: "Pricing", href: "/launch/pricing" },
+  { label: "Blog", href: "/launch/blog" },
+  { label: "FAQ", href: "/launch/faq" },
 ];
 
 export default function LaunchHeader() {
@@ -33,7 +37,7 @@ export default function LaunchHeader() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <a href="/launch" className="flex-shrink-0">
+          <Link href="/launch" className="flex-shrink-0">
             <Image
               src="/images/mainlogo.png"
               alt="Dubio"
@@ -42,18 +46,18 @@ export default function LaunchHeader() {
               className="h-8 md:h-10 w-auto"
               unoptimized
             />
-          </a>
+          </Link>
 
           {/* Desktop nav */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-white/70 hover:text-white text-sm font-medium transition-colors font-[family-name:var(--font-syne)]"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -86,14 +90,14 @@ export default function LaunchHeader() {
         >
           <div className="px-4 py-4 flex flex-col gap-3">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 className="text-white/80 hover:text-white text-base py-2 font-[family-name:var(--font-syne)]"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href={process.env.NEXT_PUBLIC_APP_URL || "https://app.dubio.ai"}
