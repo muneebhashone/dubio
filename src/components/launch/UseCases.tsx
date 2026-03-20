@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Video, GraduationCap, Podcast, Building2 } from "lucide-react";
 import { useRef, useState } from "react";
@@ -11,6 +12,8 @@ const useCases = [
     description: "Grow your YouTube, TikTok, and Instagram audience by publishing in multiple languages with your own voice.",
     stat: "10x",
     statLabel: "audience reach",
+    image: "/launch/use-creator.png",
+    imageAlt: "Abstract social video and sparkles suggesting multi-platform creator growth",
   },
   {
     icon: GraduationCap,
@@ -18,6 +21,8 @@ const useCases = [
     description: "Make your courses and lectures accessible to students worldwide without re-recording a single frame.",
     stat: "50+",
     statLabel: "language options",
+    image: "/launch/use-educator.png",
+    imageAlt: "Abstract learning scene with book and soft light suggesting accessible education",
   },
   {
     icon: Podcast,
@@ -25,6 +30,8 @@ const useCases = [
     description: "Expand your listener base globally — dub episodes into new languages while keeping your personality.",
     stat: "100%",
     statLabel: "voice match",
+    image: "/launch/use-podcast.png",
+    imageAlt: "Abstract microphone and waveforms suggesting podcast dubbing",
   },
   {
     icon: Building2,
@@ -32,6 +39,8 @@ const useCases = [
     description: "Localize training videos, product demos, and marketing content at scale without hiring voice actors.",
     stat: "90%",
     statLabel: "cost savings",
+    image: "/launch/use-business.png",
+    imageAlt: "Abstract glass panels and charts suggesting enterprise video localization",
   },
 ];
 
@@ -99,7 +108,17 @@ export default function UseCases() {
                 ease: [0.16, 1, 0.3, 1],
               }}
             >
-              <MagneticCard className="film-frame p-6 sm:p-8 h-full">
+              <MagneticCard className="film-frame overflow-hidden h-full flex flex-col p-0">
+                <div className="relative aspect-video w-full shrink-0">
+                  <Image
+                    src={uc.image}
+                    alt={uc.imageAlt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, 50vw"
+                  />
+                </div>
+                <div className="p-6 sm:p-8 flex-1 flex flex-col">
                 <div className="flex items-start justify-between mb-4">
                   <div className="w-12 h-12 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
                     <uc.icon className="w-6 h-6 text-[#7C3AED]" />
@@ -119,6 +138,7 @@ export default function UseCases() {
                 <p className="text-white/40 text-sm leading-relaxed">
                   {uc.description}
                 </p>
+                </div>
               </MagneticCard>
             </motion.div>
           ))}

@@ -31,13 +31,11 @@ export default function HowItWorks() {
     target: sectionRef,
     offset: ["start end", "end start"],
   });
-  // The connecting line grows as you scroll
   const lineHeight = useTransform(scrollYProgress, [0.2, 0.6], ["0%", "100%"]);
 
   return (
     <section id="how-it-works" ref={sectionRef} className="py-24 sm:py-32 relative">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header — curtain reveal */}
         <motion.div
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           whileInView={{ clipPath: "inset(0 0% 0 0)" }}
@@ -53,9 +51,7 @@ export default function HowItWorks() {
           </h2>
         </motion.div>
 
-        {/* Timeline */}
         <div className="relative">
-          {/* Animated connecting line */}
           <div className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-[2px] bg-white/5">
             <motion.div
               style={{ height: lineHeight }}
@@ -78,7 +74,6 @@ export default function HowItWorks() {
                 i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
               }`}
             >
-              {/* Step number node */}
               <div className="relative z-10 flex-shrink-0">
                 <div className="w-12 h-12 rounded-full bg-[#110e2e] border-2 border-[#7C3AED]/40 flex items-center justify-center">
                   <span className="text-[#7C3AED] font-bold font-[family-name:var(--font-syne)] text-lg">
@@ -87,7 +82,6 @@ export default function HowItWorks() {
                 </div>
               </div>
 
-              {/* Card */}
               <div className={`film-frame p-6 sm:p-8 flex-1 md:max-w-[45%] ${i % 2 === 0 ? "" : "md:text-right"}`}>
                 <div className={`flex items-center gap-3 mb-3 ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
                   <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
