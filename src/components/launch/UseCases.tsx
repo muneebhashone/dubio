@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { Video, GraduationCap, Podcast, Building2 } from "lucide-react";
 import { useRef, useState } from "react";
@@ -109,13 +108,14 @@ export default function UseCases() {
               }}
             >
               <MagneticCard className="film-frame overflow-hidden h-full flex flex-col p-0">
-                <div className="relative aspect-video w-full shrink-0">
-                  <Image
+                <div className="relative aspect-video w-full shrink-0 overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
                     src={uc.image}
                     alt={uc.imageAlt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 640px) 100vw, 50vw"
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-6 sm:p-8 flex-1 flex flex-col">
