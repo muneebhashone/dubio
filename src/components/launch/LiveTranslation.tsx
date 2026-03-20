@@ -47,26 +47,22 @@ export default function LiveTranslation() {
 
       for (let i = 0; i < maxLen; i++) {
         if (i >= target.length) {
-          // Shrink: fade out trailing chars
           if (progress < 0.5) {
             result += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
           }
           continue;
         }
 
-        // Wave-like reveal: chars resolve left to right
         const charProgress = progress - (i / maxLen) * 0.4;
         if (charProgress > 0.6) {
           result += target[i];
         } else if (charProgress > 0) {
-          // Scrambling
           if (target[i] === " ") {
             result += " ";
           } else {
             result += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
           }
         } else {
-          // Not yet reached
           if (i < displayText.length) {
             result += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
           } else {
@@ -108,7 +104,6 @@ export default function LiveTranslation() {
           </p>
         </motion.div>
 
-        {/* Language selector pills */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,7 +127,6 @@ export default function LiveTranslation() {
           ))}
         </motion.div>
 
-        {/* Translation display */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96, filter: "blur(8px)" }}
           whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
@@ -141,7 +135,6 @@ export default function LiveTranslation() {
           className="relative"
         >
           <div className="film-frame p-8 sm:p-12 min-h-[200px] flex items-center justify-center">
-            {/* Corner accents */}
             <div className="absolute top-3 left-3 w-4 h-4 border-t border-l border-[#7C3AED]/30 rounded-tl" />
             <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#7C3AED]/30 rounded-tr" />
             <div className="absolute bottom-3 left-3 w-4 h-4 border-b border-l border-[#7C3AED]/30 rounded-bl" />
@@ -156,7 +149,6 @@ export default function LiveTranslation() {
             </p>
           </div>
 
-          {/* Language label */}
           <div className="flex justify-center mt-4">
             <span className="text-white/20 text-xs uppercase tracking-[0.3em] font-[family-name:var(--font-syne)]">
               {activeLang}

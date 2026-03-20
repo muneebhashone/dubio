@@ -250,7 +250,6 @@ export default function LaunchHero() {
               <br />
               <span className="italic text-white/80">Every Language.</span>
             </h1>
-            {/* Language indicator */}
             <motion.p
               key={currentLang}
               initial={{ opacity: 0, y: 5 }}
@@ -261,7 +260,6 @@ export default function LaunchHero() {
             </motion.p>
           </motion.div>
 
-          {/* Subtitle */}
           <motion.p
             variants={fadeUp}
             className="text-white/45 text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
@@ -270,7 +268,6 @@ export default function LaunchHero() {
             The AI preserves your tone, your emotion, your identity.
           </motion.p>
 
-          {/* CTAs */}
           <motion.div
             variants={fadeUp}
             className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -297,7 +294,6 @@ export default function LaunchHero() {
             </ParallaxLayer>
           </motion.div>
 
-          {/* Scroll indicator */}
           <motion.div
             variants={fadeUp}
             className="mt-20 flex flex-col items-center gap-2 text-white/20"
