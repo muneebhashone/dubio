@@ -1,10 +1,32 @@
+import Link from "next/link";
 import Image from "next/image";
 
-const footerLinks = [
-  { label: "Features", href: "#features" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "Demo", href: "#demo" },
+const footerColumns = [
+  {
+    title: "Product",
+    links: [
+      { label: "Features", href: "/launch#features" },
+      { label: "How It Works", href: "/launch#how-it-works" },
+      { label: "Pricing", href: "/launch/pricing" },
+      { label: "Use Cases", href: "/launch/use-cases" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { label: "Blog", href: "/launch/blog" },
+      { label: "FAQ", href: "/launch/faq" },
+      { label: "Contact", href: "/launch/contact" },
+      { label: "About", href: "/launch/about" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/launch/legal/privacy" },
+      { label: "Terms of Service", href: "/launch/legal/terms" },
+    ],
+  },
 ];
 
 const socialLinks = [
@@ -17,36 +39,47 @@ export default function LaunchFooter() {
   return (
     <footer className="border-t border-white/5 py-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 mb-8">
+        {/* Row 1: Logo + tagline + link columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-10">
           {/* Logo + tagline */}
-          <div className="flex items-center gap-4">
+          <div className="lg:col-span-2">
             <Image
               src="/images/mainlogo.png"
               alt="Dubio"
               width={80}
               height={26}
-              className="h-7 w-auto"
+              className="h-7 w-auto mb-3"
               unoptimized
             />
-            <span className="text-white/40 text-sm">
-              AI-powered video dubbing
-            </span>
+            <p className="text-white/40 text-sm max-w-xs">
+              AI-powered video dubbing that preserves your voice, tone, and emotion across 50+ languages.
+            </p>
           </div>
 
-          {/* Nav links */}
-          <nav className="flex items-center gap-6">
-            {footerLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-white/40 hover:text-white/70 text-sm transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-          </nav>
+          {/* Link columns */}
+          {footerColumns.map((column) => (
+            <div key={column.title}>
+              <h4 className="text-white/60 font-semibold text-sm uppercase tracking-wider mb-4 font-[family-name:var(--font-syne)]">
+                {column.title}
+              </h4>
+              <ul className="space-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-white/40 hover:text-white/70 text-sm transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
-          {/* Social icons */}
+        {/* Row 2: Social icons + copyright */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/5">
           <div className="flex items-center gap-4">
             {socialLinks.map((s) => (
               <a
@@ -61,9 +94,6 @@ export default function LaunchFooter() {
               </a>
             ))}
           </div>
-        </div>
-
-        <div className="text-center pt-6 border-t border-white/5">
           <p className="text-white/30 text-xs">
             &copy; {new Date().getFullYear()} Dubio. All rights reserved.
           </p>
