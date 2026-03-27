@@ -107,7 +107,7 @@ export default function LaunchHero() {
           <motion.div variants={fadeUp} className="mb-8">
             <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/5 text-[#a78bfa] text-xs font-semibold uppercase tracking-[0.25em] font-[family-name:var(--font-syne)]">
               <span className="w-2 h-2 rounded-full bg-[#7C3AED] animate-pulse" />
-              AI Video Dubbing Platform
+              AI Dubbing Platform For Global Content
             </span>
           </motion.div>
 
