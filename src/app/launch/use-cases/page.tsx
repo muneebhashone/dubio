@@ -4,7 +4,7 @@ import { useCases } from "@/data/use-cases";
 
 export const metadata = {
   title: "Use Cases — Dubio",
-  description: "Discover how creators, educators, podcasters, and businesses use Dubio to reach global audiences.",
+  description: "Discover how Dubio helps with multi-language video dubbing, subtitles, global distribution, and corporate training.",
 };
 
 export default function UseCasesPage() {

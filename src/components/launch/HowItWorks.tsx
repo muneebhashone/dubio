@@ -2,26 +2,36 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Upload, Languages, Play } from "lucide-react";
-import { useRef } from "react";
+import React, { useRef } from "react";
+import { UploadMockup, LanguageMockup, OutputMockup } from "./StepMockups";
 
-const steps = [
+const steps: {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  detail: string;
+  mockup: React.ReactNode;
+}[] = [
   {
     icon: Upload,
     title: "Upload or Paste",
     description: "Drop a video file or paste a YouTube link.",
     detail: "MP4, MOV, or any YouTube URL",
+    mockup: <UploadMockup />,
   },
   {
     icon: Languages,
     title: "Pick Language & Voice",
     description: "Select from 50+ languages. Clone your voice or choose a new one.",
     detail: "AI preserves your unique vocal identity",
+    mockup: <LanguageMockup />,
   },
   {
     icon: Play,
     title: "Download & Share",
     description: "Get your dubbed video with synced lips and natural speech.",
     detail: "Ready in minutes, not days",
+    mockup: <OutputMockup />,
   },
 ];
 
@@ -35,7 +45,7 @@ export default function HowItWorks() {
 
   return (
     <section id="how-it-works" ref={sectionRef} className="py-24 sm:py-32 relative">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           whileInView={{ clipPath: "inset(0 0% 0 0)" }}
@@ -82,21 +92,24 @@ export default function HowItWorks() {
                 </div>
               </div>
 
-              <div className={`film-frame p-6 sm:p-8 flex-1 md:max-w-[45%] ${i % 2 === 0 ? "" : "md:text-right"}`}>
-                <div className={`flex items-center gap-3 mb-3 ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
-                  <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
-                    <step.icon className="w-5 h-5 text-[#7C3AED]" />
+              <div className={`film-frame overflow-hidden p-0 flex-1 md:max-w-[55%] ${i % 2 === 0 ? "" : "md:text-right"}`}>
+                {step.mockup}
+                <div className="p-6 sm:p-8">
+                  <div className={`flex items-center gap-3 mb-3 ${i % 2 !== 0 ? "md:flex-row-reverse" : ""}`}>
+                    <div className="w-10 h-10 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
+                      <step.icon className="w-5 h-5 text-[#7C3AED]" />
+                    </div>
+                    <h3 className="font-[family-name:var(--font-syne)] text-white font-semibold text-xl">
+                      {step.title}
+                    </h3>
                   </div>
-                  <h3 className="font-[family-name:var(--font-syne)] text-white font-semibold text-xl">
-                    {step.title}
-                  </h3>
+                  <p className="text-white/50 text-sm leading-relaxed mb-2">
+                    {step.description}
+                  </p>
+                  <p className="text-[#7C3AED]/50 text-xs font-[family-name:var(--font-syne)] uppercase tracking-wider">
+                    {step.detail}
+                  </p>
                 </div>
-                <p className="text-white/50 text-sm leading-relaxed mb-2">
-                  {step.description}
-                </p>
-                <p className="text-[#7C3AED]/50 text-xs font-[family-name:var(--font-syne)] uppercase tracking-wider">
-                  {step.detail}
-                </p>
               </div>
             </motion.div>
           ))}

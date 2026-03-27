@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
       <p><strong>Custom Voice Models:</strong> Train custom voice models for consistent brand voices across all your content.</p>
 
       <h2>Getting Started</h2>
-      <p>You can start using Dubio for free today. Our Free plan includes 3 videos per month with 5 languages. For unlimited access, check out our Pro plan at $29/month.</p>
+      <p>You can start using Dubio for free today. Every new account gets 5 free minutes to try any service — dubbing, transcription, or both. After that, pay only for what you use, starting at $0.10/min.</p>
       <p>We'd love to hear your feedback. Reach out through our contact page or join our community on social media.</p>
     `,
   },
