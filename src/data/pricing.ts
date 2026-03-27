@@ -1,185 +1,138 @@
-export interface PricingPlan {
+import { Mic, FileText, Layers, type LucideIcon } from "lucide-react";
+
+export interface PaygService {
   name: string;
   description: string;
-  monthlyPrice: number | null; // null = contact sales
-  yearlyPrice: number | null;
-  features: string[];
-  limits: {
-    videosPerMonth: string;
-    maxDuration: string;
-    languages: string;
-    quality: string;
-  };
-  cta: string;
-  ctaHref: string;
+  pricePerMinute: string;
+  icon: LucideIcon;
+  includes: string[];
   popular?: boolean;
 }
 
-export const plans: PricingPlan[] = [
+export interface FreeCredit {
+  minutes: number;
+  description: string;
+  features: string[];
+}
+
+export const freeCredit: FreeCredit = {
+  minutes: 5,
+  description: "Start dubbing for free. No credit card required.",
+  features: [
+    "Full access to all services",
+    "50+ languages available",
+    "HD quality output",
+    "Voice cloning included",
+    "No watermark",
+  ],
+};
+
+export const services: PaygService[] = [
   {
-    name: "Free",
-    description: "Perfect for trying out AI dubbing",
-    monthlyPrice: 0,
-    yearlyPrice: 0,
-    features: [
-      "3 videos per month",
-      "Up to 5 minutes per video",
-      "5 languages",
-      "Standard quality",
-      "Watermark included",
-      "Community support",
-    ],
-    limits: {
-      videosPerMonth: "3",
-      maxDuration: "5 min",
-      languages: "5",
-      quality: "Standard",
-    },
-    cta: "Start Free",
-    ctaHref: "https://app.dubio.ai",
-  },
-  {
-    name: "Pro",
-    description: "For creators who want to go global",
-    monthlyPrice: 29,
-    yearlyPrice: 23,
-    features: [
-      "50 videos per month",
-      "Up to 30 minutes per video",
-      "50+ languages",
-      "HD quality output",
-      "No watermark",
+    name: "Dubbing",
+    description: "Translate and dub your video into any language with AI voice cloning.",
+    pricePerMinute: "$0.25",
+    icon: Mic,
+    includes: [
+      "Speech recognition",
+      "AI translation",
       "Voice cloning",
       "Lip sync",
-      "Priority support",
-      "API access",
+      "50+ languages",
+      "HD/4K output",
     ],
-    limits: {
-      videosPerMonth: "50",
-      maxDuration: "30 min",
-      languages: "50+",
-      quality: "HD",
-    },
-    cta: "Start Free Trial",
-    ctaHref: "https://app.dubio.ai",
-    popular: true,
   },
   {
-    name: "Enterprise",
-    description: "Custom solutions for teams and businesses",
-    monthlyPrice: null,
-    yearlyPrice: null,
-    features: [
-      "Unlimited videos",
-      "Unlimited duration",
+    name: "Transcription",
+    description: "Generate accurate transcripts and subtitles from any video or audio.",
+    pricePerMinute: "$0.10",
+    icon: FileText,
+    includes: [
+      "Speech recognition",
+      "Subtitle generation",
       "50+ languages",
-      "4K quality output",
-      "No watermark",
-      "Advanced voice cloning",
-      "Lip sync",
-      "Dedicated account manager",
-      "Custom API integration",
-      "SLA guarantee",
-      "SSO & team management",
+      "SRT/VTT export",
+      "Speaker detection",
+      "Timestamps",
     ],
-    limits: {
-      videosPerMonth: "Unlimited",
-      maxDuration: "Unlimited",
-      languages: "50+",
-      quality: "4K",
-    },
-    cta: "Contact Sales",
-    ctaHref: "/launch/contact",
+  },
+  {
+    name: "Dubbing + Transcription",
+    description: "Full package: dub your video and get synced subtitles in one step.",
+    pricePerMinute: "$0.30",
+    icon: Layers,
+    includes: [
+      "Everything in Dubbing",
+      "Everything in Transcription",
+      "Synced subtitles",
+      "Voice cloning",
+      "Lip sync",
+      "Best value",
+    ],
+    popular: true,
   },
 ];
 
-export interface ComparisonFeature {
-  category: string;
-  features: {
-    name: string;
-    free: string | boolean;
-    pro: string | boolean;
-    enterprise: string | boolean;
-  }[];
+export interface ServiceComparisonFeature {
+  name: string;
+  dubbing: boolean;
+  transcription: boolean;
+  bundle: boolean;
 }
 
-export const comparisonFeatures: ComparisonFeature[] = [
-  {
-    category: "Dubbing",
-    features: [
-      { name: "Videos per month", free: "3", pro: "50", enterprise: "Unlimited" },
-      { name: "Max video duration", free: "5 min", pro: "30 min", enterprise: "Unlimited" },
-      { name: "Batch processing", free: false, pro: true, enterprise: true },
-    ],
-  },
-  {
-    category: "Languages",
-    features: [
-      { name: "Available languages", free: "5", pro: "50+", enterprise: "50+" },
-      { name: "Multi-language per video", free: false, pro: true, enterprise: true },
-      { name: "Custom language models", free: false, pro: false, enterprise: true },
-    ],
-  },
-  {
-    category: "Quality",
-    features: [
-      { name: "Output quality", free: "Standard", pro: "HD", enterprise: "4K" },
-      { name: "Voice cloning", free: false, pro: true, enterprise: true },
-      { name: "Lip sync", free: false, pro: true, enterprise: true },
-      { name: "No watermark", free: false, pro: true, enterprise: true },
-    ],
-  },
-  {
-    category: "Features",
-    features: [
-      { name: "Auto subtitles", free: true, pro: true, enterprise: true },
-      { name: "YouTube integration", free: false, pro: true, enterprise: true },
-      { name: "API access", free: false, pro: true, enterprise: true },
-      { name: "Custom integrations", free: false, pro: false, enterprise: true },
-    ],
-  },
-  {
-    category: "Support",
-    features: [
-      { name: "Community support", free: true, pro: true, enterprise: true },
-      { name: "Priority support", free: false, pro: true, enterprise: true },
-      { name: "Dedicated account manager", free: false, pro: false, enterprise: true },
-      { name: "SLA guarantee", free: false, pro: false, enterprise: true },
-    ],
-  },
+export const serviceComparisonFeatures: ServiceComparisonFeature[] = [
+  { name: "Speech recognition", dubbing: true, transcription: true, bundle: true },
+  { name: "AI translation", dubbing: true, transcription: false, bundle: true },
+  { name: "Voice cloning", dubbing: true, transcription: false, bundle: true },
+  { name: "Lip sync", dubbing: true, transcription: false, bundle: true },
+  { name: "Subtitle generation", dubbing: false, transcription: true, bundle: true },
+  { name: "SRT/VTT export", dubbing: false, transcription: true, bundle: true },
+  { name: "Speaker detection", dubbing: true, transcription: true, bundle: true },
+  { name: "50+ languages", dubbing: true, transcription: true, bundle: true },
+  { name: "HD/4K output", dubbing: true, transcription: false, bundle: true },
+  { name: "YouTube integration", dubbing: true, transcription: true, bundle: true },
+  { name: "API access", dubbing: true, transcription: true, bundle: true },
 ];
 
 export const pricingFAQs = [
   {
-    question: "Can I switch plans at any time?",
-    answer: "Yes, you can upgrade or downgrade your plan at any time. When upgrading, you'll be charged the prorated difference. When downgrading, your credit will be applied to future billing cycles.",
+    question: "How does pay-as-you-go pricing work?",
+    answer:
+      "You only pay for what you use. Each service is billed per minute of video processed. There are no monthly fees, no commitments, and no minimum usage requirements.",
   },
   {
-    question: "Is there a free trial for Pro?",
-    answer: "Yes! The Pro plan comes with a 14-day free trial. No credit card required to start. You'll have full access to all Pro features during the trial period.",
+    question: "Do I get free minutes to start?",
+    answer:
+      "Yes! Every new account gets 5 free minutes to try any service. No credit card required. Use them for dubbing, transcription, or both.",
   },
   {
-    question: "What happens when I exceed my video limit?",
-    answer: "On the Free plan, you'll need to wait until the next month or upgrade to Pro. On the Pro plan, additional videos are billed at $0.50 each.",
+    question: "What counts as a minute?",
+    answer:
+      "Billing is based on the duration of your input video, rounded up to the nearest minute. A 90-second video counts as 2 minutes. Processing the same video into multiple languages counts separately for each language.",
   },
   {
-    question: "Do you offer refunds?",
-    answer: "We offer a 30-day money-back guarantee on all paid plans. If you're not satisfied, contact our support team for a full refund.",
+    question: "Are there volume discounts?",
+    answer:
+      "Yes, we offer volume discounts for high-usage accounts. If you process more than 100 minutes per month, contact our sales team for custom pricing.",
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, Mastercard, American Express), PayPal, and wire transfers for Enterprise plans.",
+    answer:
+      "We accept all major credit cards (Visa, Mastercard, American Express) and PayPal. For enterprise accounts, we also support wire transfers and invoicing.",
   },
   {
-    question: "Is there a discount for annual billing?",
-    answer: "Yes! Annual billing saves you approximately 20% compared to monthly billing. The yearly price is shown when you toggle to annual billing above.",
+    question: "Can I set a spending limit?",
+    answer:
+      "Yes, you can set a monthly spending cap in your account settings. Once the limit is reached, processing pauses until you increase it or the next billing cycle begins.",
   },
   {
-    question: "Can I cancel my subscription?",
-    answer: "You can cancel your subscription at any time from your account settings. You'll continue to have access to your plan features until the end of your current billing period.",
+    question: "Do you offer enterprise pricing?",
+    answer:
+      "Yes, we offer custom enterprise plans with volume discounts, dedicated support, SLA guarantees, SSO, and custom API integrations. Contact our sales team to learn more.",
   },
   {
-    question: "Do you offer discounts for non-profits or educators?",
-    answer: "Yes, we offer special pricing for non-profits, educational institutions, and students. Contact our sales team to learn more about our discount programs.",
+    question: "Do unused free minutes expire?",
+    answer:
+      "No, your 5 free minutes never expire. Use them whenever you're ready. Once used, additional minutes are billed at the per-minute rate for each service.",
   },
 ];

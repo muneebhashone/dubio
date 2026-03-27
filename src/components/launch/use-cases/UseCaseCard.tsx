@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Video, GraduationCap, Mic, Building2 } from "lucide-react";
+import { Video, Subtitles, Globe, Users } from "lucide-react";
 import type { UseCase } from "@/data/use-cases";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Video,
-  GraduationCap,
-  Mic,
-  Building2,
+  Subtitles,
+  Globe,
+  Users,
 };
 
 interface UseCaseCardProps {

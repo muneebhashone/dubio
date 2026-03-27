@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Video, GraduationCap, Mic, Building2, Globe, DollarSign, UserX, Clock, Lock, AlertTriangle, RefreshCw, BarChart, Archive, Calendar, Check } from "lucide-react";
+import { Video, GraduationCap, Mic, Building2, Globe, DollarSign, UserX, Clock, Lock, AlertTriangle, RefreshCw, BarChart, Archive, Calendar, Check, Subtitles, Users, Layers, Languages } from "lucide-react";
 import PageHero from "@/components/launch/shared/PageHero";
 import SectionHeader from "@/components/launch/shared/SectionHeader";
 import GlassCard from "@/components/launch/shared/GlassCard";
@@ -9,7 +9,7 @@ import FadeInView from "@/components/launch/shared/FadeInView";
 import type { UseCase } from "@/data/use-cases";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
-  Video, GraduationCap, Mic, Building2, Globe, DollarSign, UserX, Clock, Lock, AlertTriangle, RefreshCw, BarChart, Archive, Calendar,
+  Video, GraduationCap, Mic, Building2, Globe, DollarSign, UserX, Clock, Lock, AlertTriangle, RefreshCw, BarChart, Archive, Calendar, Subtitles, Users, Layers, Languages,
 };
 
 export default function UseCaseSubPage({ useCase }: { useCase: UseCase }) {

@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Globe, Clapperboard, Users, type LucideIcon } from "lucide-react";
 
-const metrics = [
-  { value: 50, suffix: "+", label: "Languages", icon: "🌍" },
-  { value: 10000, suffix: "+", label: "Videos Dubbed", icon: "🎬" },
-  { value: 500, suffix: "+", label: "Creators", icon: "🎙️" },
+const metrics: { value: number; suffix: string; label: string; icon: LucideIcon }[] = [
+  { value: 50, suffix: "+", label: "Languages", icon: Globe },
+  { value: 10000, suffix: "+", label: "Videos Dubbed", icon: Clapperboard },
+  { value: 500, suffix: "+", label: "Creators", icon: Users },
 ];
 
 function AnimatedCounter({ target, suffix }: { target: number; suffix: string }) {
@@ -73,7 +74,7 @@ export default function SocialProofBar() {
       <div className="absolute bottom-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-[#7C3AED]/20 to-transparent" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-6 text-center">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-12 sm:gap-6">
           {metrics.map((m, i) => (
             <motion.div
               key={m.label}
@@ -85,9 +86,11 @@ export default function SocialProofBar() {
                 duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
               }}
-              className="flex flex-col items-center gap-3"
+              className="film-frame flex flex-col items-center gap-4 py-8 px-6"
             >
-              <span className="text-2xl mb-1">{m.icon}</span>
+              <div className="w-11 h-11 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
+                <m.icon className="w-5 h-5 text-[#7C3AED]" />
+              </div>
               <AnimatedCounter target={m.value} suffix={m.suffix} />
               <span className="text-white/30 text-xs uppercase tracking-[0.25em] font-[family-name:var(--font-syne)]">
                 {m.label}

@@ -1,45 +1,51 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Video, GraduationCap, Podcast, Building2 } from "lucide-react";
+import { Video, Subtitles, Globe, Users } from "lucide-react";
 import { useRef, useState } from "react";
+import {
+  CreatorDashboardMockup,
+  SubtitledContentMockup,
+  DistributionMockup,
+  CorporateTrainingMockup,
+} from "./UseCaseMockups";
 
 const useCases = [
   {
     icon: Video,
-    title: "Content Creators",
-    description: "Grow your YouTube, TikTok, and Instagram audience by publishing in multiple languages with your own voice.",
+    title: "YouTube Creator Dashboard",
+    description: "Manage multi-language versions of your videos from one place. See views, status, and performance across every language.",
     stat: "10x",
     statLabel: "audience reach",
-    image: "/launch/use-creator.png",
-    imageAlt: "Abstract social video and sparkles suggesting multi-platform creator growth",
+    scenario: "One video. Ten languages. Zero re-recording.",
+    mockup: <CreatorDashboardMockup />,
   },
   {
-    icon: GraduationCap,
-    title: "Educators",
-    description: "Make your courses and lectures accessible to students worldwide without re-recording a single frame.",
+    icon: Subtitles,
+    title: "Subtitled Content",
+    description: "Generate accurate, synchronized subtitles in 50+ languages automatically. Switch languages on the fly.",
     stat: "50+",
-    statLabel: "language options",
-    image: "/launch/use-educator.png",
-    imageAlt: "Abstract learning scene with book and soft light suggesting accessible education",
+    statLabel: "languages",
+    scenario: "Every word, perfectly timed, in any language.",
+    mockup: <SubtitledContentMockup />,
   },
   {
-    icon: Podcast,
-    title: "Podcasters",
-    description: "Expand your listener base globally — dub episodes into new languages while keeping your personality.",
-    stat: "100%",
-    statLabel: "voice match",
-    image: "/launch/use-podcast.png",
-    imageAlt: "Abstract microphone and waveforms suggesting podcast dubbing",
+    icon: Globe,
+    title: "Multi-Language Distribution",
+    description: "Distribute dubbed content across YouTube, TikTok, and Instagram simultaneously. One upload, every platform.",
+    stat: "3x",
+    statLabel: "platform reach",
+    scenario: "Publish everywhere. In every language. At once.",
+    mockup: <DistributionMockup />,
   },
   {
-    icon: Building2,
-    title: "Businesses",
-    description: "Localize training videos, product demos, and marketing content at scale without hiring voice actors.",
+    icon: Users,
+    title: "Corporate Training",
+    description: "Roll out training videos to global teams in their native language. Track progress by region and language.",
     stat: "90%",
     statLabel: "cost savings",
-    image: "/launch/use-business.png",
-    imageAlt: "Abstract glass panels and charts suggesting enterprise video localization",
+    scenario: "Scale training globally in minutes.",
+    mockup: <CorporateTrainingMockup />,
   },
 ];
 
@@ -108,36 +114,30 @@ export default function UseCases() {
               }}
             >
               <MagneticCard className="film-frame overflow-hidden h-full flex flex-col p-0">
-                <div className="relative aspect-video w-full shrink-0 overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={uc.image}
-                    alt={uc.imageAlt}
-                    className="absolute inset-0 h-full w-full object-cover"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+                {uc.mockup}
                 <div className="p-6 sm:p-8 flex-1 flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
-                    <uc.icon className="w-6 h-6 text-[#7C3AED]" />
-                  </div>
-                  <div className="text-right">
-                    <div className="text-[#F59E0B] font-[family-name:var(--font-syne)] font-bold text-2xl leading-none">
-                      {uc.stat}
+                  <p className="text-[#F59E0B]/60 text-xs italic font-[family-name:var(--font-instrument-serif)] mb-4">
+                    {uc.scenario}
+                  </p>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="w-12 h-12 rounded-xl bg-[#7C3AED]/10 flex items-center justify-center">
+                      <uc.icon className="w-6 h-6 text-[#7C3AED]" />
                     </div>
-                    <div className="text-white/25 text-[10px] uppercase tracking-wider mt-1 font-[family-name:var(--font-syne)]">
-                      {uc.statLabel}
+                    <div className="text-right">
+                      <div className="text-[#F59E0B] font-[family-name:var(--font-syne)] font-bold text-2xl leading-none">
+                        {uc.stat}
+                      </div>
+                      <div className="text-white/25 text-[10px] uppercase tracking-wider mt-1 font-[family-name:var(--font-syne)]">
+                        {uc.statLabel}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <h3 className="font-[family-name:var(--font-syne)] text-white font-semibold text-lg mb-2">
-                  {uc.title}
-                </h3>
-                <p className="text-white/40 text-sm leading-relaxed">
-                  {uc.description}
-                </p>
+                  <h3 className="font-[family-name:var(--font-syne)] text-white font-semibold text-lg mb-2">
+                    {uc.title}
+                  </h3>
+                  <p className="text-white/40 text-sm leading-relaxed">
+                    {uc.description}
+                  </p>
                 </div>
               </MagneticCard>
             </motion.div>
