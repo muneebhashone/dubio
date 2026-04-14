@@ -32,12 +32,12 @@ export default function ProductDemoPreview() {
     >
       <div className="overflow-hidden p-0">
         {/* Browser chrome — hidden on mobile */}
-        <div className="hidden sm:flex items-center gap-1.5 px-4 py-3 border-b border-white/5">
-          <div className="w-3 h-3 rounded-full bg-white/5" />
-          <div className="w-3 h-3 rounded-full bg-white/5" />
-          <div className="w-3 h-3 rounded-full bg-white/5" />
-          <div className="flex-1 mx-3 h-6 rounded-md bg-white/5 flex items-center justify-center">
-            <span className="text-white/25 text-[11px] font-[family-name:var(--font-syne)]">
+        <div className="hidden sm:flex items-center gap-2 px-4 py-4 border-b border-white/5 ">
+          <div className="w-4.5 h-4.5 rounded-full bg-white/5" />
+          <div className="w-4.5 h-4.5 rounded-full bg-white/5" />
+          <div className="w-4.5 h-4.5 rounded-full bg-white/5" />
+          <div className="flex-1 mx-3 h-10 rounded-md bg-white/5 flex items-center justify-start pl-8">
+            <span className="text-white/40 text-[11px] md:text-[18px] font-[family-name:var(--font-syne)]">
               www.dubio.ai
             </span>
           </div>
@@ -47,9 +47,16 @@ export default function ProductDemoPreview() {
         <div className="px-5 sm:px-8 pt-5 sm:pt-7 pb-6 sm:pb-8">
           {/* Videos + center play button row */}
           <div className="relative grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 items-center">
-            {/* Dashed lines — left and right segments, stopping before center button */}
-            <div className="hidden md:block absolute top-[45%] left-0 w-[calc(50%-70px)] -translate-y-1/2 border-t-2 border-dashed border-white/10 z-0" />
-            <div className="hidden md:block absolute top-[45%] right-0 w-[calc(53%-70px)] -translate-y-1/2 border-t-2 border-dashed border-white/10 z-0" />
+            {/* Dashed line — single div, continuously animates left to right */}
+            <motion.div
+              animate={{ backgroundPosition: ["100% 0%", "0% 0%"] }}
+              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              className="hidden md:block absolute top-[40%] left-0 w-full -translate-y-1/2 z-0 h-[2px]"
+              style={{
+                backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 8px, transparent 8px, transparent 16px)",
+                backgroundSize: "200% 100%",
+              }}
+            />
             {/* Before - Original English video */}
             <motion.div
               initial={{ opacity: 0, x: -20 }}
@@ -62,9 +69,9 @@ export default function ProductDemoPreview() {
               className="relative z-[1]"
             >
               {/* English speech bubble */}
-              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] min-w-0 mx-auto md:mx-0 mb-3">
-                <Volume2 className="w-4 h-4 text-white/40 shrink-0" />
-                <span className="text-[#856cce] text-[11px] sm:text-sm truncate sm:whitespace-normal">
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] min-w-0 mx-auto md:mx-0 mb-8">
+                <Volume2 className="w-5 h-5 text-white/40 shrink-0" />
+                <span className="text-[#856cce] text-[11px] sm:text-base truncate sm:whitespace-normal">
                   I think you are the one who did this thing...
                 </span>
               </div>
@@ -92,12 +99,12 @@ export default function ProductDemoPreview() {
               </div>
 
               {/* Bottom labels */}
-              <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-6 justify-center md:justify-start">
-                <span className="px-2 sm:px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-[10px] sm:text-[11px] text-white/50 font-[family-name:var(--font-syne)] uppercase tracking-wider">
+              <div className="flex flex-wrap items-center gap-4 mt-4 sm:mt-6 justify-center md:justify-start">
+                <span className="px-2 sm:px-5 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-lg text-white/50 font-[family-name:var(--font-syne)] uppercase tracking-wider">
                   Before
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-[10px] sm:text-[11px] text-white/50 font-[family-name:var(--font-syne)] uppercase tracking-wider">
-                  <span className="text-xs sm:text-sm leading-none">🇺🇸</span>
+                <span className="inline-flex items-center gap-1.5 px-2 sm:px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-lg text-white/50 font-[family-name:var(--font-syne)] uppercase tracking-wider">
+                  <span className="text-xs sm:text-base leading-none">🇺🇸</span>
                   Original — English
                 </span>
               </div>
@@ -113,11 +120,23 @@ export default function ProductDemoPreview() {
                   duration: 0.5,
                   ease: [0.16, 1, 0.3, 1],
                 }}
+                className="relative flex items-center justify-center -ml-4"
               >
+                {/* Echo rings — start from image edge, expand outward smoothly */}
+                {[0, 1.8, 3.6].map((delay, i) => (
+                  <motion.span
+                    key={i}
+                    animate={{ scale: [1, 2.5], opacity: [0.55, 0.40,0.25,0.15,0.5] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "linear", delay }}
+                    className="absolute w-20 h-20 rounded-full border border-[#7C3AED]/40 "
+                  />
+                ))}
+                {/* Static purple glow behind icon */}
+                <span className="absolute w-28 h-28 rounded-full bg-[#7C3AED]/15" />
                 <img
-                  src="/images/demoplayermidbutton.png"
+                  src="/images/Link_Dubio.png"
                   alt="Play"
-                  className="w-32 h-32 -ml-2 object-contain"
+                  className="relative z-10 w-18 h-18 object-contain rounded-xl"
                 />
               </motion.div>
               <motion.div
@@ -128,17 +147,28 @@ export default function ProductDemoPreview() {
                 <img
                   src="/images/demoplayerarrow.png"
                   alt="Arrow"
-                  className="w-36 object-contain -ml-2"
+                  className="w-40 object-contain ml-1 mt-14"
                 />
               </motion.div>
             </div>
             {/* Mobile divider */}
             <div className="flex md:hidden flex-col items-center gap-1 py-2">
-              <img
-                src="/images/demoplayermidbutton.png"
-                alt="Play"
-                className="w-20 h-20 object-contain"
-              />
+              <div className="relative flex items-center justify-center">
+                {[0, 0.8, 1.6].map((delay, i) => (
+                  <motion.span
+                    key={i}
+                    animate={{ scale: [1, 2.2], opacity: [0.35, 0] }}
+                    transition={{ duration: 2.4, repeat: Infinity, ease: "linear", delay }}
+                    className="absolute w-16 h-16 rounded-full border border-[#7C3AED]/40"
+                  />
+                ))}
+                <span className="absolute w-18 h-18 rounded-full bg-[#7C3AED]/15" />
+                <img
+                  src="/images/Link_Dubio.png"
+                  alt="Play"
+                  className="relative z-10 w-14 h-14 object-contain rounded-lg"
+                />
+              </div>
               <img
                 src="/images/demoplayerarrow.png"
                 alt="Arrow"
@@ -158,14 +188,14 @@ export default function ProductDemoPreview() {
               className="relative z-[1]"
             >
               {/* Chinese speech bubble */}
-              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] min-w-0 mx-auto md:mx-0 mb-3">
-                <Volume2 className="w-4 h-4 shrink-0" />
-                <span className="text-[11px] sm:text-sm truncate sm:whitespace-normal">
+              <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] min-w-0 mx-auto md:mx-0 mb-8">
+                <Volume2 className="w-5 h-5 shrink-0" />
+                <span className="text-[11px] sm:text-base truncate sm:whitespace-normal">
                   我认为你是做这件事的人
                 </span>
               </div>
               <div
-                className="mt-2 sm:mt-0 relative w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] aspect-video bg-[#0c0928] rounded-[4px] overflow-hidden ring-4 sm:ring-8 ring-[#7467B9]/90 shadow-[0_0_30px_-5px_rgba(124,58,237,0.3)] cursor-pointer mx-auto md:mx-0 md:[aspect-ratio:432/297]"
+                className="mt-2 sm:mt-0 relative w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] aspect-video bg-[#0c0928] rounded-[4px] overflow-hidden ring-4 sm:ring-8 ring-[#7467B9]/90 shadow-[0_0_60px_10px_rgba(124,58,237,0.35),0_0_120px_40px_rgba(124,58,237,0.15)] cursor-pointer mx-auto md:mx-0 md:[aspect-ratio:432/297]"
                 onClick={() => setPlayingAfter(true)}
               >
                 {playingAfter ? (
@@ -188,11 +218,11 @@ export default function ProductDemoPreview() {
               </div>
 
               {/* Bottom labels */}
-              <div className="flex flex-wrap items-center gap-2 mt-4 sm:mt-6 justify-center md:justify-start">
-                <span className="px-2 sm:px-3 py-1 rounded-xl bg-white/5 border border-white/10 text-[10px] sm:text-[11px] text-white/50 font-[family-name:var(--font-syne)] uppercase tracking-wider">
+              <div className="flex flex-wrap items-center gap-4 mt-4 sm:mt-6 justify-center md:justify-start">
+                <span className="px-2 sm:px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] sm:text-lg text-white/50 font-[family-name:var(--font-syne)] uppercase tracking-wider">
                   After
                 </span>
-                <span className="inline-flex items-center gap-1.5 px-2 sm:px-3 py-1 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[10px] sm:text-[11px] text-[#7C3AED]/70 font-[family-name:var(--font-syne)] uppercase tracking-wider">
+                <span className="inline-flex items-center gap-1.5 px-2 sm:px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[10px] sm:text-lg text-[#7C3AED]/70 font-[family-name:var(--font-syne)] uppercase tracking-wider">
                   <span className="text-xs sm:text-sm leading-none">🇨🇳</span>
                   Dubbed — Chinese
                 </span>

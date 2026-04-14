@@ -18,7 +18,7 @@ const useCases = [
     stat: "10x",
     statLabel: "audience reach",
     scenario: "One video. Ten languages. Zero re-recording.",
-    mockup: <CreatorDashboardMockup />,
+    mockup: <img src="/images/creator1.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover" />,
   },
   {
     icon: Subtitles,
