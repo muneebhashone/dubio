@@ -15,22 +15,22 @@ const steps: {
   {
     icon: Upload,
     title: "Upload or Paste",
-    description: "Drop a video file or paste a YouTube link.",
-    detail: "MP4, MOV, or any YouTube URL",
+    description: "Drop a video file or paste a Youtube link",
+    detail: "Supports MP4, MOV, or any YouTube URL.",
     mockup: <UploadMockup />,
   },
   {
     icon: Languages,
     title: "Pick Language & Voice",
-    description: "Select from 50+ languages. Clone your voice or choose a new one.",
-    detail: "AI preserves your unique vocal identity",
+    description: "Choose from 50+ languages with perfect lip-sync.",
+    detail: "Clone your own voice or pick a new one - your unique tone and emotion fully preserved.",
     mockup: <LanguageMockup />,
   },
   {
     icon: Play,
     title: "Download & Share",
     description: "Get your dubbed video with synced lips and natural speech.",
-    detail: "Ready in minutes, not days",
+    detail: "Ready in minutes - share instantly to Youtube, TikTok, Instagram, and more.",
     mockup: <OutputMockup />,
   },
 ];
@@ -114,6 +114,9 @@ export default function HowItWorks() {
             </motion.div>
           ))}
         </div>
+        <motion.p className="mt-8 text-center text-white/40 text-xs sm:text-sm font-[family-name:var(--font-syne)] tracking-wide">
+          AI that preserves your unique vocal identity • No quality loss • Works with any accent
+        </motion.p>
       </div>
     </section>
   );

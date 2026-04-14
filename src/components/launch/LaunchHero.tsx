@@ -101,7 +101,7 @@ export default function LaunchHero() {
       <div className="absolute inset-0 launch-grain pointer-events-none" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 text-center">
+      <div className="relative z-10 max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-20 text-center">
         <motion.div variants={container} initial="hidden" animate="show">
           {/* Eyebrow */}
           <motion.div variants={fadeUp} className="mb-8">
@@ -137,8 +137,9 @@ export default function LaunchHero() {
             variants={fadeUp}
             className="text-white/45 text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
           >
-            Clone your voice. Dub your videos into 50+ languages in seconds.
-            The AI preserves your tone, your emotion, your identity.
+            {/* Clone your voice. Dub your videos into 50+ languages in seconds.
+            The AI preserves your tone, your emotion, your identity. */}
+            Dub your video into 50+ languages in seconds - with perfect lip-sync and exact voice, tone & emotion fully preserved.
           </motion.p>
 
           <motion.div
@@ -161,6 +162,35 @@ export default function LaunchHero() {
               </svg>
               Watch Demo
             </a>
+          </motion.div>
+          <motion.p
+            variants={fadeUp}
+            className="text-white/45 text-sm sm:text-base max-w-2xl mx-auto mb-12 leading-relaxed mt-1"
+          >
+            5 free minutes - No credit card required - Cancel anytime
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            className="mt-3 mb-8 mx-auto max-w-3xl border-y border-white/12 bg-white/[0.02] px-4 py-3 sm:px-5"
+          >
+            <div className="flex flex-col items-center justify-between gap-3 sm:flex-row sm:gap-4">
+              <p className="text-center text-xs sm:text-sm text-white/70 font-[family-name:var(--font-syne)] tracking-wide">
+                4,000+ videos dubbed · 200+ creators · 50+ languages
+              </p>
+
+              <div className="flex items-center gap-2">
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/5 text-[10px] font-semibold text-white/80">
+                  YT
+                </span>
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/5 text-[10px] font-semibold text-white/80">
+                  IG
+                </span>
+                <span className="inline-flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/5 text-[10px] font-semibold text-white/80">
+                  TT
+                </span>
+              </div>
+            </div>
           </motion.div>
 
           <ProductDemoPreview />

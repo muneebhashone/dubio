@@ -18,6 +18,7 @@ export default function PricingPage() {
         title="Pay Only for What You Use"
         subtitle="Simple per-minute pricing. Start with 5 free minutes. No credit card required."
       />
+      
 
       {/* Free credit banner */}
       <section className="py-8">
