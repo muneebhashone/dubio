@@ -9,7 +9,7 @@ const features = [
     icon: Mic,
     title: "Voice Cloning",
     description:
-      "AI captures your unique vocal fingerprint and reproduces it in any language — preserving tone, emotion, and personality.",
+      "Capture your unique vocal fingerprint and clone it in any language. Preserve your exact tone, emotion, and personality — no one will know it's dubbed.",
     accent: "#7C3AED",
     accentRgb: "124, 58, 237",
     tag: "CORE",
@@ -20,7 +20,7 @@ const features = [
     icon: ScanFace,
     title: "Lip Sync",
     description:
-      "Natural-looking lip movements matched perfectly to the dubbed audio. Your face, your expressions — new language.",
+      "Natural-looking lip movements perfectly matched to the new audio. Your face, your expressions, your energy — now in any language.",
     accent: "#6366F1",
     accentRgb: "99, 102, 241",
     tag: "AI",
@@ -30,7 +30,7 @@ const features = [
     icon: Globe,
     title: "50+ Languages",
     description:
-      "From Spanish to Japanese, Hindi to Arabic — reach every audience on the planet without limits.",
+      "Dub your content into Spanish, Japanese, Hindi, Arabic, and 50+ more with native-quality  results. Reach every audience on the planet — no limits.",
     accent: "#10B981",
     accentRgb: "16, 185, 129",
     tag: "SCALE",
@@ -40,7 +40,7 @@ const features = [
     icon: Subtitles,
     title: "Auto Subtitles",
     description:
-      "Generate pixel-perfect subtitles in both source and target languages. Burn-in or export as SRT.",
+      "Generate pixel-perfect, timed subtitles in both the orignal and target languages. Burn-in or export as SRT — ready for any platform.",
     accent: "#F59E0B",
     accentRgb: "245, 158, 11",
     tag: "AUTO",
@@ -50,7 +50,7 @@ const features = [
     icon: Youtube,
     title: "YouTube Integration",
     description:
-      "Paste a YouTube URL and dub directly — no download, no re-upload. Seamless start to finish.",
+      "Paste a YouTube URL and dub directly — no download, no re-upload. Seamless from start to finish. Get your dubbed version in minutes.",
     accent: "#EF4444",
     accentRgb: "239, 68, 68",
     tag: "IMPORT",
@@ -60,7 +60,7 @@ const features = [
     icon: UsersRound,
     title: "Multi-Speaker",
     description:
-      "Automatically detect and dub multiple speakers, each with their own distinct cloned voice.",
+      "Automatically detect and dub multiple speakers in one video. Each person keeps their own cloned voice — perfect for interviews, podcasts, and learn videos.",
     accent: "#EC4899",
     accentRgb: "236, 72, 153",
     tag: "PRO",
@@ -265,6 +265,7 @@ function DesktopReel() {
                 The Toolkit
               </h2>
             </div>
+
             <div className="hidden lg:flex items-center gap-2 text-white/20 text-sm font-[family-name:var(--font-syne)]">
               <span className="uppercase tracking-[0.2em]">Scroll to explore</span>
               <svg
@@ -273,15 +274,18 @@ function DesktopReel() {
                 stroke="currentColor"
                 strokeWidth={1.5}
                 viewBox="0 0 24 24"
-              >
+                >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                />
+                  />
               </svg>
             </div>
           </div>
+          <p className="mt-3 text-white/40 text-sm sm:text-base max-w-2xl font-[family-name:var(--font-syne)]">
+            Everything you need to dub videos professionally — with your voice, perfect lip-sync, and zero extra work.
+          </p>
         </div>
 
         {/* Film strip sprocket holes */}

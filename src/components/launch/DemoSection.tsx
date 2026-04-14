@@ -19,6 +19,9 @@ export default function DemoSection() {
           <h2 className="font-[family-name:var(--font-instrument-serif)] text-white text-3xl sm:text-4xl md:text-5xl italic">
             See Dubio in Action
           </h2>
+          <p className="mt-4 text-white/40 text-sm sm:text-base max-w-2xl mx-auto font-[family-name:var(--font-syne)]">
+            Watch your video transform instantly. Perfect lip-sync, voice cloning, and multi-language dubbing — all in one place.
+          </p>
         </motion.div>
 
         <motion.div
