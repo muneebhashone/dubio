@@ -2,18 +2,20 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { Play, Pause, RotateCcw, RefreshCcw } from "lucide-react";
+import { Play, Pause, RefreshCcw } from "lucide-react";
 import Image from "next/image";
 
 export default function DemoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
+  // const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(25);
-  const [volume, setVolume] = useState(60);
+  // const [volume, setVolume] = useState(60);
   const [currentTime, setCurrentTime] = useState("00:20");
   const [duration, setDuration] = useState("01:35");
+
+  // console.log(isMuted,volume)
 
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
@@ -45,23 +47,23 @@ export default function DemoSection() {
     [],
   );
 
-  const handleVolumeChange = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      const video = videoRef.current;
-      const bar = e.currentTarget;
-      const rect = bar.getBoundingClientRect();
-      const pos = Math.max(
-        0,
-        Math.min(1, (e.clientX - rect.left) / rect.width),
-      );
-      setVolume(pos * 100);
-      if (video) {
-        video.volume = pos;
-        setIsMuted(pos === 0);
-      }
-    },
-    [],
-  );
+  // const handleVolumeChange = useCallback(
+  //   (e: React.MouseEvent<HTMLDivElement>) => {
+  //     const video = videoRef.current;
+  //     const bar = e.currentTarget;
+  //     const rect = bar.getBoundingClientRect();
+  //     const pos = Math.max(
+  //       0,
+  //       Math.min(1, (e.clientX - rect.left) / rect.width),
+  //     );
+  //     setVolume(pos * 100);
+  //     if (video) {
+  //       video.volume = pos;
+  //       setIsMuted(pos === 0);
+  //     }
+  //   },
+  //   [],
+  // );
 
   useEffect(() => {
     const video = videoRef.current;
