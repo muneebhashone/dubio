@@ -18,7 +18,7 @@ const useCases = [
     stat: "10x",
     statLabel: "audience reach",
     scenario: "One video. Ten languages. Zero re-recording.",
-    mockup: <img src="/images/creator1.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover" />,
+    mockup: <img src="/images/creator4.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
   },
   {
     icon: Subtitles,
@@ -27,7 +27,7 @@ const useCases = [
     stat: "50+",
     statLabel: "languages",
     scenario: "Every word, perfectly timed, in any language.",
-    mockup: <SubtitledContentMockup />,
+    mockup: <img src="/images/creator3.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
   },
   {
     icon: Globe,
@@ -36,7 +36,7 @@ const useCases = [
     stat: "3x",
     statLabel: "platform reach",
     scenario: "Publish everywhere. In every language. At once.",
-    mockup: <DistributionMockup />,
+    mockup: <img src="/images/creator1.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
   },
   {
     icon: Users,
@@ -45,7 +45,7 @@ const useCases = [
     stat: "90%",
     statLabel: "cost savings",
     scenario: "Scale training globally in minutes.",
-    mockup: <CorporateTrainingMockup />,
+    mockup: <img src="/images/creator2.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
   },
 ];
 
@@ -99,7 +99,7 @@ export default function UseCases() {
             Built for Every Creator
           </h2>
           <p className="mt-4 text-white/40 text-sm sm:text-base max-w-2xl mx-auto font-[family-name:var(--font-syne)]">
-            From solo YouTubers to global brands — Dubio helps you reach audiences in any language while keeping your authentic voice. 
+            From solo YouTubers to global brands — Dubio helps you reach audiences in any language while keeping your authentic voice.
           </p>
         </motion.div>
 
@@ -115,8 +115,9 @@ export default function UseCases() {
                 duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
               }}
+              className=""
             >
-              <MagneticCard className="film-frame overflow-hidden h-full flex flex-col p-0">
+              <MagneticCard className={`film-frame overflow-hidden h-full flex flex-col ${i === 0 ? "p-4" : i === 2 ? "py-4 pl-4" : i === 3 ? "py-0" : "py-4"}`}>
                 {uc.mockup}
                 <div className="p-6 sm:p-8 flex-1 flex flex-col">
                   <p className="text-[#F59E0B]/60 text-xs italic font-[family-name:var(--font-instrument-serif)] mb-4">
