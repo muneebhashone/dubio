@@ -3,12 +3,6 @@
 import { motion } from "framer-motion";
 import { Video, Subtitles, Globe, Users, Star, Quote } from "lucide-react";
 import { useRef, useState } from "react";
-import {
-  CreatorDashboardMockup,
-  SubtitledContentMockup,
-  DistributionMockup,
-  CorporateTrainingMockup,
-} from "./UseCaseMockups";
 
 const useCases = [
   {

@@ -1,5 +1,4 @@
 import LaunchHero from "@/components/launch/LaunchHero";
-import SocialProofBar from "@/components/launch/SocialProofBar";
 import HowItWorks from "@/components/launch/HowItWorks";
 import FeatureReel from "@/components/launch/FeatureReel";
 import LiveTranslation from "@/components/launch/LiveTranslation";
