@@ -100,7 +100,7 @@ export default function LiveTranslation() {
             See Translation in Action
           </h2>
           <p className="text-white/40 text-base max-w-lg mx-auto">
-            Click any language below and watch the text transform in real time.
+            Click any language below and watch the text (and voice) transform instantly in real time.
           </p>
         </motion.div>
 
