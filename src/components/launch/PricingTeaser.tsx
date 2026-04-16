@@ -5,13 +5,13 @@ import { Check, Gift, Sparkles, Mic, FileText, Layers, ArrowRight } from "lucide
 
 const servicePreview = [
   { name: "Dubbing", price: "$0.25", icon: Mic },
-  { name: "Transcription", price: "$0.10", icon: FileText },
-  { name: "Dubbing + Transcription", price: "$0.30", icon: Layers },
+  { name: "Subtitle", price: "$0.10", icon: FileText },
+  { name: "Dubbing + Subtitle", price: "$0.30", icon: Layers },
 ];
 
 const freeFeatures = [
   "5 free minutes",
-  "All services included",
+  "Full access to all features",
   "No credit card required",
   "50+ languages",
   "Voice cloning",
@@ -31,6 +31,9 @@ export default function PricingTeaser() {
           <h2 className="font-[family-name:var(--font-instrument-serif)] text-white text-3xl sm:text-4xl md:text-5xl italic">
             Simple Per-Minute Pricing
           </h2>
+          <p className="mt-3 text-white/40 text-sm sm:text-base max-w-2xl font-[family-name:var(--font-syne)]">
+            Start free. Scale affordably. No hidden fees. No long-term contracts.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

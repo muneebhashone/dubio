@@ -105,7 +105,7 @@ export default function FinalCTA() {
             Ready to Go Global?
           </h2>
           <p className="text-white/40 text-base sm:text-lg mb-10 max-w-lg mx-auto">
-            Join thousands of creators who are breaking language barriers with Dubio.
+            Join thousands of creators who are breaking language barriers and reaching new audiences — while keeping their authentic voice, tone, and emotion.
           </p>
 
           <form
