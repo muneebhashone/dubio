@@ -291,6 +291,40 @@ function DesktopReel() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [totalPages, setTotalPages] = useState(1);
 
+  // Mouse drag-to-scroll
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    isDragging.current = true;
+    startX.current = e.pageX - el.offsetLeft;
+    scrollLeft.current = el.scrollLeft;
+    el.style.cursor = "grabbing";
+    el.style.userSelect = "none";
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging.current) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    e.preventDefault();
+    const x = e.pageX - el.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    el.scrollLeft = scrollLeft.current - walk;
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    isDragging.current = false;
+    const el = scrollRef.current;
+    if (el) {
+      el.style.cursor = "grab";
+      el.style.userSelect = "";
+    }
+  }, []);
+
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -361,8 +395,12 @@ function DesktopReel() {
 
       <div
         ref={scrollRef}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
         className="flex gap-6 px-8 overflow-x-auto"
-        style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch", cursor: "grab" }}
       >
         <style>{`#features div::-webkit-scrollbar { display: none; }`}</style>
         {features.map((f) => (

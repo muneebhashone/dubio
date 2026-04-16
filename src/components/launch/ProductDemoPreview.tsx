@@ -5,13 +5,13 @@ import { motion } from "framer-motion";
 import { Play, Volume2 } from "lucide-react";
 
 // ── Change these video IDs when you have the real ones ──
-const BEFORE_VIDEO_ID = "d3Qq-rkp_to";
-const AFTER_VIDEO_ID = "d3Qq-rkp_to";
+const BEFORE_VIDEO_ID = "https://dubio-general.s3.us-east-1.amazonaws.com/public/source-demo_clipped.mp4";
+const AFTER_VIDEO_ID = "https://dubio-general.s3.us-east-1.amazonaws.com/public/dubbed_clipped.mp4";
 
 function YouTubeEmbed({ videoId }: { videoId: string }) {
   return (
     <iframe
-      src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+      src={`${videoId}`}
       className="absolute inset-0 w-full h-full"
       allow="autoplay; encrypted-media"
       allowFullScreen
