@@ -4,18 +4,19 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Play, Volume2 } from "lucide-react";
 
-// ── Change these video IDs when you have the real ones ──
+// ── Demo clips served from S3 (public/); replace at the same keys to update. ──
 const BEFORE_VIDEO_ID = "https://dubio-general.s3.us-east-1.amazonaws.com/public/source-demo_clipped.mp4";
 const AFTER_VIDEO_ID = "https://dubio-general.s3.us-east-1.amazonaws.com/public/dubbed_clipped.mp4";
 
-function YouTubeEmbed({ videoId }: { videoId: string }) {
+function DemoVideo({ src }: { src: string }) {
   return (
-    <iframe
-      src={`${videoId}`}
-      className="absolute inset-0 w-full h-full"
-      allow="autoplay; encrypted-media"
-      allowFullScreen
-      frameBorder="0"
+    <video
+      src={src}
+      className="absolute inset-0 w-full h-full object-cover bg-black"
+      controls
+      autoPlay
+      playsInline
+      preload="metadata"
     />
   );
 }
@@ -80,11 +81,11 @@ export default function ProductDemoPreview() {
                 onClick={() => setPlayingBefore(true)}
               >
                 {playingBefore ? (
-                  <YouTubeEmbed videoId={BEFORE_VIDEO_ID} />
+                  <DemoVideo src={BEFORE_VIDEO_ID} />
                 ) : (
                   <>
                     <img
-                      src="/images/demoplayer.png"
+                      src="/images/demoplayer-before.png"
                       alt="Original English video"
                       className="absolute inset-0 w-full h-full object-cover"
                     />
@@ -199,11 +200,11 @@ export default function ProductDemoPreview() {
                 onClick={() => setPlayingAfter(true)}
               >
                 {playingAfter ? (
-                  <YouTubeEmbed videoId={AFTER_VIDEO_ID} />
+                  <DemoVideo src={AFTER_VIDEO_ID} />
                 ) : (
                   <>
                     <img
-                      src="/images/demoplayer.png"
+                      src="/images/demoplayer-after.png"
                       alt="AI dubbed Chinese video"
                       className="absolute inset-0 w-full h-full object-cover"
                     />

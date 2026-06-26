@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { Check, Gift, Sparkles, Mic, FileText, Layers, ArrowRight } from "lucide-react";
 
 const servicePreview = [
-  { name: "Dubbing", price: "$0.25", icon: Mic },
-  { name: "Subtitle", price: "$0.10", icon: FileText },
-  { name: "Dubbing + Subtitle", price: "$0.30", icon: Layers },
+  { name: "Dubbing", price: "$0.25", icon: Mic, best: false },
+  { name: "Subtitle", price: "$0.10", icon: FileText, best: false },
+  { name: "Dubbing + Subtitle", price: "$0.30", icon: Layers, best: true },
 ];
 
 const freeFeatures = [
@@ -28,6 +28,10 @@ export default function PricingTeaser() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
         >
+          <span className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full border border-[#7C3AED]/30 bg-[#7C3AED]/10 text-[11px] uppercase tracking-[0.2em] text-white/70 font-[family-name:var(--font-syne)]">
+            <Sparkles className="w-3 h-3 text-[#7C3AED]" />
+            Pricing
+          </span>
           <h2 className="font-[family-name:var(--font-instrument-serif)] text-white text-3xl sm:text-4xl md:text-5xl italic">
             Simple Per-Minute Pricing
           </h2>
@@ -126,10 +130,20 @@ export default function PricingTeaser() {
 
             <ul className="space-y-4 mb-8 flex-1">
               {servicePreview.map((s) => (
-                <li key={s.name} className="flex items-center justify-between text-sm">
+                <li
+                  key={s.name}
+                  className={`flex items-center justify-between text-sm rounded-lg -mx-2 px-2 py-1.5 ${
+                    s.best ? "bg-[#7C3AED]/10 ring-1 ring-[#7C3AED]/20" : ""
+                  }`}
+                >
                   <div className="flex items-center gap-3 text-white/50">
                     <s.icon className="w-4 h-4 flex-shrink-0 text-[#7C3AED]" />
                     {s.name}
+                    {s.best && (
+                      <span className="text-[10px] uppercase tracking-wider text-[#F59E0B] font-[family-name:var(--font-syne)]">
+                        Best value
+                      </span>
+                    )}
                   </div>
                   <span className="text-white/70 font-[family-name:var(--font-syne)] font-medium">
                     {s.price}<span className="text-white/30">/min</span>
@@ -147,6 +161,21 @@ export default function PricingTeaser() {
             </a>
           </motion.div>
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-white/40 text-xs font-[family-name:var(--font-syne)]"
+        >
+          {["No subscription", "Cancel anytime", "Pay only for what you use"].map((t) => (
+            <span key={t} className="inline-flex items-center gap-2">
+              <Check className="w-3.5 h-3.5 text-[#7C3AED]" />
+              {t}
+            </span>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
