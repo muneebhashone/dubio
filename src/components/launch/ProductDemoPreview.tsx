@@ -85,7 +85,7 @@ export default function ProductDemoPreview() {
                 ) : (
                   <>
                     <img
-                      src="/images/demoplayer.png"
+                      src="/images/demoplayer-before.png"
                       alt="Original English video"
                       className="absolute inset-0 w-full h-full object-cover"
                     />
@@ -204,7 +204,7 @@ export default function ProductDemoPreview() {
                 ) : (
                   <>
                     <img
-                      src="/images/demoplayer.png"
+                      src="/images/demoplayer-after.png"
                       alt="AI dubbed Chinese video"
                       className="absolute inset-0 w-full h-full object-cover"
                     />
