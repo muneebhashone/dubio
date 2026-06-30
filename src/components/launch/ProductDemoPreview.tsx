@@ -1,22 +1,80 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Play, Volume2 } from "lucide-react";
 
 // ── Demo clips served from S3 (public/); replace at the same keys to update. ──
 const BEFORE_VIDEO_ID = "https://dubio-general.s3.us-east-1.amazonaws.com/public/source-demo_clipped.mp4";
-const AFTER_VIDEO_ID = "https://dubio-general.s3.us-east-1.amazonaws.com/public/dubbed_clipped.mp4";
+const BEFORE_POSTER = "/images/demoplayer-before.png";
+const DEMO_ASSET_BASE = "https://dubio-general.s3.us-east-1.amazonaws.com/public/homepage-demo";
+const AFTER_VIDEO_ID = `${DEMO_ASSET_BASE}/dubbed-zh.mp4`;
 
-function DemoVideo({ src }: { src: string }) {
+type DemoLanguage = {
+  code: string;
+  name: string;
+  flag: string;
+  shortCode: string;
+  speech: string;
+  poster: string;
+  videoSrc: string;
+};
+
+const DEMO_LANGUAGES: DemoLanguage[] = [
+  {
+    code: "zh",
+    name: "Chinese",
+    flag: "🇨🇳",
+    shortCode: "CN",
+    speech: "我认为你是做这件事的人",
+    poster: "/images/demoplayer-after.png",
+    videoSrc: AFTER_VIDEO_ID,
+  },
+  {
+    code: "ja",
+    name: "Japanese",
+    flag: "🇯🇵",
+    shortCode: "JP",
+    speech: "あなたがこれをした人だと思います",
+    poster: "/images/demoplayer-after.png",
+    videoSrc: `${DEMO_ASSET_BASE}/dubbed-ja.mp4`,
+  },
+  {
+    code: "es",
+    name: "Spanish",
+    flag: "🇪🇸",
+    shortCode: "ES",
+    speech: "Creo que tú eres quien hizo esto",
+    poster: "/images/demoplayer-after.png",
+    videoSrc: `${DEMO_ASSET_BASE}/dubbed-es.mp4`,
+  },
+];
+
+function DemoVideo({
+  src,
+  poster,
+  fallbackSrc = src,
+}: {
+  src: string;
+  poster?: string;
+  fallbackSrc?: string;
+}) {
+  const [resolvedSrc, setResolvedSrc] = useState(src);
+
   return (
     <video
-      src={src}
+      key={resolvedSrc}
+      src={resolvedSrc}
+      poster={poster}
       className="absolute inset-0 w-full h-full object-cover bg-black"
       controls
       autoPlay
       playsInline
-      preload="metadata"
+      preload="auto"
+      onError={() => {
+        if (resolvedSrc !== fallbackSrc) setResolvedSrc(fallbackSrc);
+      }}
     />
   );
 }
@@ -24,6 +82,13 @@ function DemoVideo({ src }: { src: string }) {
 export default function ProductDemoPreview() {
   const [playingBefore, setPlayingBefore] = useState(false);
   const [playingAfter, setPlayingAfter] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState<DemoLanguage>(DEMO_LANGUAGES[0]);
+
+  const handleLanguageSelect = (language: DemoLanguage) => {
+    setSelectedLanguage(language);
+    setPlayingAfter(false);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
@@ -81,12 +146,15 @@ export default function ProductDemoPreview() {
                 onClick={() => setPlayingBefore(true)}
               >
                 {playingBefore ? (
-                  <DemoVideo src={BEFORE_VIDEO_ID} />
+                  <DemoVideo src={BEFORE_VIDEO_ID} poster={BEFORE_POSTER} />
                 ) : (
                   <>
-                    <img
-                      src="/images/demoplayer-before.png"
+                    <Image
+                      src={BEFORE_POSTER}
                       alt="Original English video"
+                      fill
+                      sizes="(min-width: 768px) 432px, (min-width: 640px) 340px, 260px"
+                      priority
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                     {/* Play button */}
@@ -177,7 +245,7 @@ export default function ProductDemoPreview() {
               />
             </div>
 
-            {/* After - Dubbed Chinese video */}
+            {/* After - selected dubbed video */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -188,11 +256,50 @@ export default function ProductDemoPreview() {
               }}
               className="relative z-[1]"
             >
-              {/* Chinese speech bubble */}
+              <div className="mb-4 w-full max-w-[260px] sm:max-w-[340px] md:max-w-[520px] mx-auto md:mx-0 rounded-2xl border border-[#7C3AED]/40 bg-[#7C3AED]/15 p-3 shadow-[0_0_30px_-12px_rgba(124,58,237,0.75)]">
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="text-sm sm:text-base font-[family-name:var(--font-syne)] text-white/85">
+                    Choose dubbed language
+                  </p>
+                  <p className="text-[10px] sm:text-xs font-[family-name:var(--font-syne)] text-white/45">
+                    Preview each output
+                  </p>
+                </div>
+                <div className="mt-3 flex gap-2 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                  {DEMO_LANGUAGES.map((language) => {
+                    const isActive = language.code === selectedLanguage.code;
+                    return (
+                      <button
+                        key={language.code}
+                        type="button"
+                        onClick={() => handleLanguageSelect(language)}
+                        onMouseEnter={() => {
+                          const video = document.createElement("video");
+                          video.preload = "metadata";
+                          video.src = language.videoSrc;
+                        }}
+                        aria-pressed={isActive}
+                        className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-2.5 py-1.5 text-xs sm:text-sm font-[family-name:var(--font-syne)] transition ${
+                          isActive
+                            ? "border-[#F59E0B] bg-[#F59E0B] text-white shadow-[0_0_20px_rgba(245,158,11,0.25)]"
+                            : "border-white/12 bg-white/5 text-white/70 hover:border-[#7C3AED]/50 hover:bg-[#7C3AED]/15 hover:text-white"
+                        }`}
+                      >
+                        <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/10 text-[10px] font-bold leading-none">
+                          {language.shortCode}
+                        </span>
+                        <span>{language.flag}</span>
+                        <span>{language.name}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 rounded-xl bg-[#7C3AED]/10 border border-[#7C3AED]/20 w-full max-w-[260px] sm:max-w-[340px] md:max-w-[432px] min-w-0 mx-auto md:mx-0 mb-8">
                 <Volume2 className="w-5 h-5 shrink-0" />
                 <span className="text-[11px] sm:text-base truncate sm:whitespace-normal">
-                  我认为你是做这件事的人
+                  {selectedLanguage.speech}
                 </span>
               </div>
               <div
@@ -200,12 +307,19 @@ export default function ProductDemoPreview() {
                 onClick={() => setPlayingAfter(true)}
               >
                 {playingAfter ? (
-                  <DemoVideo src={AFTER_VIDEO_ID} />
+                  <DemoVideo
+                    src={selectedLanguage.videoSrc}
+                    poster={selectedLanguage.poster}
+                    fallbackSrc={AFTER_VIDEO_ID}
+                  />
                 ) : (
                   <>
-                    <img
-                      src="/images/demoplayer-after.png"
-                      alt="AI dubbed Chinese video"
+                    <Image
+                      src={selectedLanguage.poster}
+                      alt={`AI dubbed ${selectedLanguage.name} video`}
+                      fill
+                      sizes="(min-width: 768px) 432px, (min-width: 640px) 340px, 260px"
+                      priority={selectedLanguage.code === "zh"}
                       className="absolute inset-0 w-full h-full object-cover"
                     />
                     {/* Play button */}
@@ -224,8 +338,8 @@ export default function ProductDemoPreview() {
                   After
                 </span>
                 <span className="inline-flex items-center gap-1.5 px-2 sm:px-4 py-2 rounded-full bg-[#7C3AED]/10 border border-[#7C3AED]/20 text-[10px] sm:text-lg text-[#7C3AED]/70 font-[family-name:var(--font-syne)] uppercase tracking-wider">
-                  <span className="text-xs sm:text-sm leading-none">🇨🇳</span>
-                  Dubbed — Chinese
+                  <span className="text-xs sm:text-sm leading-none">{selectedLanguage.flag}</span>
+                  Dubbed — {selectedLanguage.name}
                 </span>
               </div>
             </motion.div>
