@@ -132,7 +132,9 @@ export default function UseCaseCard({ useCase, index }: UseCaseCardProps) {
             alt={image.alt}
             width={image.width}
             height={image.height}
+            sizes="(min-width: 768px) 560px, 100vw"
             className="h-auto w-full object-cover"
+            unoptimized
           />
         ) : null}
 

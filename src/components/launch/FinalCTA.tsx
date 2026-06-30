@@ -1,13 +1,12 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Send } from "lucide-react";
 import apiClient from "@/lib/apiClient";
 import { AxiosError } from "axios";
 
-// Mini interactive waveform for background
-function MiniWaveform() {
+function MiniWaveform({ active }: { active: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animRef = useRef<number>(0);
 
@@ -46,14 +45,20 @@ function MiniWaveform() {
   }, []);
 
   useEffect(() => {
+    if (!active) {
+      cancelAnimationFrame(animRef.current);
+      return;
+    }
     animRef.current = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(animRef.current);
-  }, [draw]);
+  }, [active, draw]);
 
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />;
 }
 
 export default function FinalCTA() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const inView = useInView(sectionRef, { once: true, margin: "200px" });
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
@@ -88,16 +93,16 @@ export default function FinalCTA() {
   };
 
   return (
-    <section id="final-cta" className="relative py-24 sm:py-32 overflow-hidden">
-      <MiniWaveform />
+    <section ref={sectionRef} id="final-cta" className="relative py-24 sm:py-32 overflow-hidden">
+      <MiniWaveform active={inView} />
 
       {/* Radial glow */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(124,58,237,0.12),transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6 text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, filter: "blur(12px)" }}
-          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         >

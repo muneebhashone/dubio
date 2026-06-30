@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Video, Subtitles, Globe, Users, Star, Quote } from "lucide-react";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 const useCases = [
@@ -12,7 +13,10 @@ const useCases = [
     stat: "10x",
     statLabel: "audience reach",
     scenario: "One video. Ten languages. Zero re-recording.",
-    mockup: <img src="/images/creator4.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
+    image: "/images/creator4.png",
+    imageAlt: "YouTube Creator Dashboard",
+    imageWidth: 1293,
+    imageHeight: 755,
   },
   {
     icon: Subtitles,
@@ -21,7 +25,10 @@ const useCases = [
     stat: "50+",
     statLabel: "languages",
     scenario: "Every word, perfectly timed, in any language.",
-    mockup: <img src="/images/creator3.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
+    image: "/images/creator3.png",
+    imageAlt: "Subtitled content preview",
+    imageWidth: 533,
+    imageHeight: 291,
   },
   {
     icon: Globe,
@@ -30,7 +37,10 @@ const useCases = [
     stat: "3x",
     statLabel: "platform reach",
     scenario: "Publish everywhere. In every language. At once.",
-    mockup: <img src="/images/creator1.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
+    image: "/images/creator1.png",
+    imageAlt: "Multi-language distribution",
+    imageWidth: 493,
+    imageHeight: 285,
   },
   {
     icon: Users,
@@ -39,7 +49,10 @@ const useCases = [
     stat: "90%",
     statLabel: "cost savings",
     scenario: "Scale training globally in minutes.",
-    mockup: <img src="/images/creator2.png" alt="YouTube Creator Dashboard" className="w-full h-auto object-cover " />,
+    image: "/images/creator2.png",
+    imageAlt: "Corporate training",
+    imageWidth: 523,
+    imageHeight: 299,
   },
 ];
 
@@ -80,8 +93,8 @@ export default function UseCases() {
     <section className="py-24 sm:py-32 relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="text-center mb-16"
@@ -101,8 +114,8 @@ export default function UseCases() {
           {useCases.map((uc, i) => (
             <motion.div
               key={uc.title}
-              initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-30px" }}
               transition={{
                 delay: i * 0.1,
@@ -112,7 +125,16 @@ export default function UseCases() {
               className=""
             >
               <MagneticCard className={`film-frame overflow-hidden h-full flex flex-col ${i === 0 ? "p-4" : i === 2 ? "py-4 pl-4" : i === 3 ? "py-0" : "py-4"}`}>
-                {uc.mockup}
+                <Image
+                  src={uc.image}
+                  alt={uc.imageAlt}
+                  width={uc.imageWidth}
+                  height={uc.imageHeight}
+                  sizes="(min-width: 768px) 560px, 100vw"
+                  loading="lazy"
+                  className="w-full h-auto object-cover"
+                  unoptimized
+                />
                 <div className="p-6 sm:p-8 flex-1 flex flex-col">
                   <p className="text-[#F59E0B]/60 text-xs italic font-[family-name:var(--font-instrument-serif)] mb-4">
                     {uc.scenario}
@@ -143,8 +165,8 @@ export default function UseCases() {
         </div>
         {/* Testimonials */}
         <motion.div
-          initial={{ opacity: 0, y: 40, filter: "blur(8px)" }}
-          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="mt-20"
