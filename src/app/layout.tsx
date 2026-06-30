@@ -35,6 +35,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://dubio-general.s3.us-east-1.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://dubio-general.s3.us-east-1.amazonaws.com" />
+      </head>
       <body
         className={`${montserrat.variable} ${syne.variable} ${instrumentSerif.variable} antialiased bg-[#0a0724]`}
       >
