@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useCallback, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Mic, ScanFace, Globe, Subtitles, Youtube, UsersRound } from "lucide-react";
 
@@ -14,6 +15,10 @@ const features = [
     accentRgb: "124, 58, 237",
     tag: "CORE",
     image: "/images/toolkitimage1.png",
+    imageWidth: 355,
+    imageHeight: 218,
+    imageWrapClass: "-mt-16 -ml-14",
+    imageClass: "h-auto object-contain rounded-xl",
     wave: [.3, .5, .8, .6, .9, .4, .7, .5, .3, .6, .8, .5, .4, .7, .9, .6, .3, .5, .7, .4],
   },
   {
@@ -25,6 +30,10 @@ const features = [
     accentRgb: "99, 102, 241",
     tag: "AI",
     image: "/images/toolkitimage2.png",
+    imageWidth: 473,
+    imageHeight: 233,
+    imageWrapClass: "-mt-12 -ml-4",
+    imageClass: "w-full h-auto object-contain rounded-xl",
     wave: [.4, .6, .5, .8, .7, .3, .5, .9, .6, .4, .7, .5, .8, .3, .6, .4, .7, .5, .3, .6],
   },
   {
@@ -36,6 +45,10 @@ const features = [
     accentRgb: "16, 185, 129",
     tag: "SCALE",
     image: "/images/toolkitimage3.png",
+    imageWidth: 324,
+    imageHeight: 175,
+    imageWrapClass: "-mt-16 -ml-8",
+    imageClass: "h-auto object-contain rounded-xl",
     wave: [.5, .7, .4, .6, .8, .5, .3, .7, .6, .9, .4, .5, .7, .8, .3, .6, .5, .4, .7, .5],
   },
   {
@@ -47,6 +60,10 @@ const features = [
     accentRgb: "245, 158, 11",
     tag: "AUTO",
     image: "/images/toolkitimage4.png",
+    imageWidth: 318,
+    imageHeight: 172,
+    imageWrapClass: "-mt-12 -ml-4",
+    imageClass: "h-auto object-contain rounded-xl",
     wave: [.6, .4, .7, .5, .3, .8, .6, .4, .7, .5, .9, .3, .6, .4, .8, .5, .7, .3, .5, .6],
   },
   {
@@ -58,6 +75,10 @@ const features = [
     accentRgb: "239, 68, 68",
     tag: "IMPORT",
     image: "/images/toolkitimage5.png",
+    imageWidth: 310,
+    imageHeight: 171,
+    imageWrapClass: "-mt-12 -ml-4",
+    imageClass: "h-auto object-contain rounded-xl",
     wave: [.7, .5, .3, .6, .8, .4, .7, .5, .6, .3, .8, .7, .4, .5, .6, .9, .3, .7, .5, .4],
   },
   {
@@ -69,6 +90,10 @@ const features = [
     accentRgb: "236, 72, 153",
     tag: "PRO",
     image: "/images/toolkitimage6.png",
+    imageWidth: 340,
+    imageHeight: 171,
+    imageWrapClass: "-mt-12 -ml-4",
+    imageClass: "h-auto object-contain rounded-xl",
     wave: [.3, .8, .5, .7, .4, .6, .9, .3, .5, .7, .4, .8, .6, .3, .7, .5, .4, .6, .8, .5],
   },
 ];
@@ -184,11 +209,23 @@ function FeatureCard({
             </div>
 
             {/* Image on top-left */}
-            <div className={`flex-1 flex items-start justify-start ${feature.title === "Lip Sync" ? "-mt-12 -ml-4" : feature.title === "Voice Cloning" ? "-mt-16 -ml-14" : feature.title === "Auto Subtitles" || feature.title === "YouTube Integration" || feature.title === "Multi-Speaker" ? "-mt-12 -ml-4" : "-mt-16 -ml-8"}`}>
-              <img
+            <div
+              className={`w-full overflow-visible ${isDesktop ? "flex-1 min-h-0" : ""} flex items-start justify-start ${feature.imageWrapClass}`}
+            >
+              <Image
                 src={feature.image}
                 alt={feature.title}
-                className={`${feature.title === "Lip Sync" ? "w-full" : "w-"} h-auto object-contain rounded-xl`}
+                width={feature.imageWidth}
+                height={feature.imageHeight}
+                sizes={`(min-width: 1024px) ${feature.imageWidth}px, ${Math.min(feature.imageWidth, 340)}px`}
+                loading="lazy"
+                unoptimized
+                className={feature.imageClass}
+                style={
+                  feature.imageClass.includes("w-full")
+                    ? undefined
+                    : { width: feature.imageWidth, height: "auto" }
+                }
               />
             </div>
 

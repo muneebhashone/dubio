@@ -72,8 +72,8 @@ export default function HowItWorks() {
           {steps.map((step, i) => (
             <motion.div
               key={step.title}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60, filter: "blur(8px)" }}
-              whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{
                 duration: 0.7,
