@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { Play, Pause, RefreshCcw } from "lucide-react";
 import Image from "next/image";
-
 export default function DemoSection() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const progressRef = useRef<HTMLDivElement>(null);
@@ -109,10 +108,15 @@ export default function DemoSection() {
         </motion.div>
         {/* Left overlay image */}
         <div className="absolute left-[17%] top-1/2 z-10">
-          <img
+          <Image
             src="/images/demoplayerlefttext.png"
             alt="Lips Synced & Voice Cloning"
+            width={199}
+            height={109}
+            sizes="(min-width: 640px) 192px, 160px"
+            loading="lazy"
             className="w-40 sm:w-48 h-auto"
+            unoptimized
           />
         </div>
         <div className="absolute right-[21%] top-[37%] z-10">
@@ -126,30 +130,47 @@ export default function DemoSection() {
               />
             ))}
             <span className="absolute w-28 h-28 rounded-full bg-[#7C3AED]/15" />
-            <Image src="/images/Link_Dubio2.png" alt="Dubio" width={100} height={100} className="relative z-10 w-18 h-18 object-contain rounded-xl"/>
+            <Image
+              src="/images/Link_Dubio2.png"
+              alt="Dubio"
+              width={100}
+              height={100}
+              className="relative z-10 w-18 h-18 object-contain rounded-xl"
+              unoptimized
+            />
           </div>
         </div>
 
         {/* Right overlay image */}
         <div className="absolute right-[15%] top-[60%] z-10">
-          <img
+          <Image
             src="/images/demoplayerrighttext.png"
             alt="Subtitles & Captions"
+            width={230}
+            height={284}
+            sizes="(min-width: 640px) 208px, 160px"
+            loading="lazy"
             className="w-40 sm:w-52 h-auto"
+            unoptimized
           />
         </div>
 
         <div className="absolute right-[42%] bottom-[1%] z-10">
-          <img
+          <Image
             src="/images/demplayerbottonimage.png"
             alt="Subtitles & Captions"
+            width={397}
+            height={195}
+            sizes="(min-width: 640px) 384px, 240px"
+            loading="lazy"
             className="w-60 sm:w-96 h-auto"
+            unoptimized
           />
         </div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.85, filter: "blur(10px)" }}
-          whileInView={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
         >
@@ -171,7 +192,7 @@ export default function DemoSection() {
               <video
                 ref={videoRef}
                 className="w-full h-auto cursor-pointer block rounded-4xl mb-8"
-                preload="metadata"
+                preload="none"
                 poster="/images/demoplayerimage.png"
                 playsInline
                 onClick={togglePlay}

@@ -5,17 +5,20 @@ import "./globals.css";
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const syne = Syne({
   variable: "--font-syne",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -35,6 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://dubio-general.s3.us-east-1.amazonaws.com" />
+        <link rel="dns-prefetch" href="https://dubio-general.s3.us-east-1.amazonaws.com" />
+      </head>
       <body
         className={`${montserrat.variable} ${syne.variable} ${instrumentSerif.variable} antialiased bg-[#0a0724]`}
       >
