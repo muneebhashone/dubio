@@ -2,7 +2,7 @@
 
 import { Play, Globe, Subtitles, Eye, Languages, Download, Users } from "lucide-react";
 
-// 1. YouTube Creator Dashboard mockup
+// 1. Creator Dashboard mockup
 export function CreatorDashboardMockup() {
   const videos = [
     { lang: "EN", views: "124K", status: "Published" },
@@ -102,10 +102,10 @@ export function SubtitledContentMockup() {
 
 // 3. Multi-language Distribution mockup
 export function DistributionMockup() {
-  const platforms = [
-    { name: "YouTube", icon: "▶", color: "text-red-400/50", bg: "bg-red-500/10", langs: 8 },
-    { name: "TikTok", icon: "♪", color: "text-white/40", bg: "bg-white/5", langs: 5 },
-    { name: "Instagram", icon: "◎", color: "text-pink-400/50", bg: "bg-pink-500/10", langs: 6 },
+  const exports = [
+    { format: "MP4", label: "Dubbed video", langs: 8, icon: "▶", color: "text-[#7C3AED]/60", bg: "bg-[#7C3AED]/10" },
+    { format: "SRT", label: "Subtitles", langs: 8, icon: "≡", color: "text-[#F59E0B]/60", bg: "bg-[#F59E0B]/10" },
+    { format: "MP4+SRT", label: "Full bundle", langs: 8, icon: "↓", color: "text-white/50", bg: "bg-white/5" },
   ];
 
   return (
@@ -113,20 +113,20 @@ export function DistributionMockup() {
       <div className="flex items-center gap-2 mb-1">
         <Globe className="w-3.5 h-3.5 text-white/20" />
         <span className="text-white/30 text-[10px] font-[family-name:var(--font-syne)] uppercase tracking-wider">
-          Distribution Overview
+          Export Overview
         </span>
       </div>
       <div className="flex-1 flex flex-col gap-2">
-        {platforms.map((p) => (
-          <div key={p.name} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/5">
-            <div className={`w-7 h-7 rounded-lg ${p.bg} flex items-center justify-center shrink-0`}>
-              <span className={`${p.color} text-sm`}>{p.icon}</span>
+        {exports.map((item) => (
+          <div key={item.format} className="flex items-center gap-3 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/5">
+            <div className={`w-7 h-7 rounded-lg ${item.bg} flex items-center justify-center shrink-0`}>
+              <span className={`${item.color} text-sm`}>{item.icon}</span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="text-white/40 text-[10px] font-[family-name:var(--font-syne)] font-medium">{p.name}</div>
+              <div className="text-white/40 text-[10px] font-[family-name:var(--font-syne)] font-medium">{item.label}</div>
               <div className="flex items-center gap-1 mt-0.5">
                 <Languages className="w-2.5 h-2.5 text-[#7C3AED]/40" />
-                <span className="text-white/20 text-[8px]">{p.langs} languages</span>
+                <span className="text-white/20 text-[8px]">{item.langs} languages available</span>
               </div>
             </div>
             <div className="flex gap-1">
@@ -136,7 +136,7 @@ export function DistributionMockup() {
                 </span>
               ))}
               <span className="text-[7px] px-1 py-0.5 rounded bg-[#7C3AED]/10 text-[#a78bfa]/60 font-[family-name:var(--font-syne)]">
-                +{p.langs - 3}
+                +{item.langs - 3}
               </span>
             </div>
           </div>
@@ -144,7 +144,7 @@ export function DistributionMockup() {
       </div>
       <div className="flex items-center justify-center gap-2">
         <Download className="w-3 h-3 text-[#F59E0B]/30" />
-        <span className="text-[#F59E0B]/30 text-[9px] font-[family-name:var(--font-syne)]">19 videos distributed across 3 platforms</span>
+        <span className="text-[#F59E0B]/30 text-[9px] font-[family-name:var(--font-syne)]">24 files ready to download across 8 languages</span>
       </div>
     </div>
   );

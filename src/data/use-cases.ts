@@ -39,16 +39,16 @@ export interface UseCase {
 export const useCases: UseCase[] = [
   {
     slug: "creator-dashboard",
-    title: "YouTube Creator Dashboard",
+    title: "Creator Dashboard",
     shortTitle: "Creator Dashboard",
     icon: "Video",
     stat: "10x",
     statLabel: "Audience Reach",
-    description: "Manage multi-language versions of your videos from one place. See views, status, and performance across every dubbed language.",
+    description: "Manage multi-language versions of your videos from one place. Track dubbed outputs, status, and performance across every language.",
     hero: {
       eyebrow: "For Creators",
       title: "Grow Your Audience 10x",
-      subtitle: "Break language barriers and reach viewers worldwide. Dub your YouTube, TikTok, and Instagram content into 50+ languages while keeping your authentic voice.",
+      subtitle: "Break language barriers and reach viewers worldwide. Upload your videos and dub them into 50+ languages while keeping your authentic voice.",
     },
     painPoints: [
       { title: "Limited Reach", description: "Your content only reaches audiences who speak your language, leaving billions of potential viewers untapped.", icon: "Globe" },
@@ -59,14 +59,14 @@ export const useCases: UseCase[] = [
     solutions: [
       { title: "Voice-Preserved Dubbing", description: "Our AI clones your voice in 50+ languages, keeping your tone, emotion, and personality intact." },
       { title: "One-Click Multi-Language", description: "Upload once, dub into multiple languages simultaneously. Your video is ready in minutes, not weeks." },
-      { title: "YouTube Integration", description: "Paste a YouTube URL and get a dubbed version ready to upload to your multi-language channels." },
+      { title: "Studio Workflow", description: "Upload videos directly to the Dubio studio and manage all your dubbed versions from one dashboard." },
       { title: "Lip Sync Technology", description: "Viewers see your lips match the dubbed audio for a natural viewing experience." },
     ],
     workflow: [
-      { step: 1, title: "Upload Your Video", description: "Upload your video or paste a YouTube URL directly into Dubio." },
+      { step: 1, title: "Upload Your Video", description: "Upload your video file directly into the Dubio studio — MP4, MOV, and more." },
       { step: 2, title: "Choose Languages", description: "Select from 50+ target languages for your content." },
       { step: 3, title: "AI Dubs Your Video", description: "Our AI clones your voice, translates, and syncs everything in minutes." },
-      { step: 4, title: "Publish Globally", description: "Download your dubbed videos and publish to reach new audiences worldwide." },
+      { step: 4, title: "Download & Publish", description: "Download your dubbed videos and publish to reach new audiences worldwide." },
     ],
     stats: [
       { value: "10x", label: "Average audience growth" },
@@ -77,7 +77,7 @@ export const useCases: UseCase[] = [
     testimonial: {
       quote: "Dubio helped me reach viewers in Japan, Brazil, and Germany overnight. My subscriber count has tripled in just two months.",
       name: "Alex Rivera",
-      role: "YouTube Creator, 500K subscribers",
+      role: "Content Creator, 500K subscribers",
     },
   },
   {
