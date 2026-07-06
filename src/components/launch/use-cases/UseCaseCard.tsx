@@ -20,7 +20,7 @@ const imageMap: Record<
 > = {
   "creator-dashboard": {
     src: "/images/creator4.png",
-    alt: "YouTube Creator Dashboard",
+    alt: "Creator Dashboard",
     width: 1293,
     height: 755,
   },

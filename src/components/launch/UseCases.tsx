@@ -8,13 +8,13 @@ import { useRef, useState } from "react";
 const useCases = [
   {
     icon: Video,
-    title: "YouTube Creator Dashboard",
-    description: "Manage multi-language versions of your videos from one dashboard. See views, engagement, and performance across every language in real time.",
+    title: "Creator Dashboard",
+    description: "Manage multi-language versions of your videos from one dashboard. Track dubbed outputs and performance across every language in real time.",
     stat: "10x",
     statLabel: "audience reach",
     scenario: "One video. Ten languages. Zero re-recording.",
     image: "/images/creator4.png",
-    imageAlt: "YouTube Creator Dashboard",
+    imageAlt: "Creator dashboard",
     imageWidth: 1293,
     imageHeight: 755,
   },
@@ -33,9 +33,9 @@ const useCases = [
   {
     icon: Globe,
     title: "Multi-Language Distribution",
-    description: "Publish your dubbed videos to YouTube, TikTok, Instagram, and more - all from one upload. Expland your reach 3x without extra work.",
+    description: "Publish your dubbed videos anywhere — all from one upload. Expand your reach 3x without extra production work.",
     stat: "3x",
-    statLabel: "platform reach",
+    statLabel: "language reach",
     scenario: "Publish everywhere. In every language. At once.",
     image: "/images/creator1.png",
     imageAlt: "Multi-language distribution",
@@ -106,7 +106,7 @@ export default function UseCases() {
             Built for Every Creator
           </h2>
           <p className="mt-4 text-white/40 text-sm sm:text-base max-w-2xl mx-auto font-[family-name:var(--font-syne)]">
-            From solo YouTubers to global brands — Dubio helps you reach audiences in any language while keeping your authentic voice.
+            From solo creators to global brands — Dubio helps you reach audiences in any language while keeping your authentic voice.
           </p>
         </motion.div>
 
@@ -179,7 +179,7 @@ export default function UseCases() {
             {[
               {
                 name: "Sarah Chen",
-                role: "YouTube Creator • 1.2M subs",
+                role: "Content Creator • 1.2M subs",
                 avatar: "SC",
                 quote: "Dubio helped me reach my Chinese-speaking audience without re-recording a single video. My engagement tripled in two weeks.",
                 stars: 5,

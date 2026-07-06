@@ -3,7 +3,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mic, ScanFace, Globe, Subtitles, Youtube, UsersRound } from "lucide-react";
+import { Mic, ScanFace, Globe, Subtitles, Languages, Download } from "lucide-react";
 
 const features = [
   {
@@ -55,7 +55,7 @@ const features = [
     icon: Subtitles,
     title: "Auto Subtitles",
     description:
-      "Generate pixel-perfect, timed subtitles in both the orignal and target languages. Burn-in or export as SRT — ready for any platform.",
+      "Generate pixel-perfect, timed subtitles in both the original and target languages. Burn-in or export as SRT — ready for any platform.",
     accent: "#F59E0B",
     accentRgb: "245, 158, 11",
     tag: "AUTO",
@@ -67,13 +67,13 @@ const features = [
     wave: [.6, .4, .7, .5, .3, .8, .6, .4, .7, .5, .9, .3, .6, .4, .8, .5, .7, .3, .5, .6],
   },
   {
-    icon: Youtube,
-    title: "YouTube Integration",
+    icon: Languages,
+    title: "Multi-Language Dubbing",
     description:
-      "Paste a YouTube URL and dub directly — no download, no re-upload. Seamless from start to finish. Get your dubbed version in minutes.",
+      "Upload once, publish everywhere — generate dubbed versions of the same video in multiple languages from a single workflow.",
     accent: "#EF4444",
     accentRgb: "239, 68, 68",
-    tag: "IMPORT",
+    tag: "SCALE",
     image: "/images/toolkitimage5.png",
     imageWidth: 310,
     imageHeight: 171,
@@ -82,13 +82,13 @@ const features = [
     wave: [.7, .5, .3, .6, .8, .4, .7, .5, .6, .3, .8, .7, .4, .5, .6, .9, .3, .7, .5, .4],
   },
   {
-    icon: UsersRound,
-    title: "Multi-Speaker",
+    icon: Download,
+    title: "Downloadable Exports",
     description:
-      "Automatically detect and dub multiple speakers in one video. Each person keeps their own cloned voice — perfect for interviews, podcasts, and learn videos.",
+      "Download finished dubbed videos and subtitle files — MP4 and SRT — ready to publish anywhere on your own schedule.",
     accent: "#EC4899",
     accentRgb: "236, 72, 153",
-    tag: "PRO",
+    tag: "EXPORT",
     image: "/images/toolkitimage6.png",
     imageWidth: 340,
     imageHeight: 171,

@@ -14,9 +14,9 @@ const steps: {
 }[] = [
     {
       icon: Upload,
-      title: "Upload or Paste",
-      description: "Drop a video file or paste a Youtube link",
-      detail: "Supports MP4, MOV, or any YouTube URL.",
+      title: "Upload Your Video",
+      description: "Drop a video file into the studio to get started.",
+      detail: "Supports MP4, MOV, and other common formats.",
       mockup: <UploadMockup />,
     },
     {
@@ -30,7 +30,7 @@ const steps: {
       icon: Play,
       title: "Download & Share",
       description: "Get your dubbed video with synced lips and natural speech.",
-      detail: "Ready in minutes - share instantly to Youtube, TikTok, Instagram, and more.",
+      detail: "Ready in minutes — download and share anywhere.",
       mockup: <OutputMockup />,
     },
   ];

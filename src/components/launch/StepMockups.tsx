@@ -6,7 +6,7 @@ export function UploadMockup() {
     <div className="w-[80%] mx-auto mt-10">
       <Image
         src="/images/howirworks1.png"
-        alt="Upload or paste your file"
+        alt="Upload your video"
         width={402}
         height={293}
         sizes="(min-width: 768px) 402px, 80vw"
