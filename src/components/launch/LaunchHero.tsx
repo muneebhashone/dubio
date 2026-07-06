@@ -54,7 +54,7 @@ export default function LaunchHero() {
         </div>
 
         <p className="text-white/45 text-sm sm:text-base max-w-2xl mx-auto mb-12 leading-relaxed mt-1">
-          5 free minutes - No credit card required - Cancel anytime
+          First minute free · No credit card required
         </p>
 
         <div className="mt-3 mb-8 mx-auto max-w-3xl rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-sm px-6 py-4 sm:px-8">

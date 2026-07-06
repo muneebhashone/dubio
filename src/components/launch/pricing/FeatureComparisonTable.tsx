@@ -16,7 +16,7 @@ export default function FeatureComparisonTable() {
   return (
     <FadeInView>
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[640px]">
+        <table className="w-full min-w-[880px]">
           <thead>
             <tr className="border-b border-white/10">
               <th className="text-left py-4 px-4 text-white/40 text-sm font-normal w-1/4">Feature</th>
@@ -36,9 +36,11 @@ export default function FeatureComparisonTable() {
             {serviceComparisonFeatures.map((feature) => (
               <tr key={feature.name} className="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
                 <td className="py-3 px-4 text-white/60 text-sm">{feature.name}</td>
-                <td className="py-3 px-4 text-center">{renderValue(feature.dubbing)}</td>
-                <td className="py-3 px-4 text-center">{renderValue(feature.transcription)}</td>
-                <td className="py-3 px-4 text-center">{renderValue(feature.bundle)}</td>
+                {feature.values.map((value, index) => (
+                  <td key={`${feature.name}-${services[index]?.name ?? index}`} className="py-3 px-4 text-center">
+                    {renderValue(value)}
+                  </td>
+                ))}
               </tr>
             ))}
           </tbody>
