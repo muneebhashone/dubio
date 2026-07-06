@@ -1,16 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Check, Gift, Sparkles, Mic, FileText, Layers, ArrowRight } from "lucide-react";
-
-const servicePreview = [
-  { name: "Dubbing", price: "$0.25", icon: Mic, best: false },
-  { name: "Subtitle", price: "$0.10", icon: FileText, best: false },
-  { name: "Dubbing + Subtitle", price: "$0.30", icon: Layers, best: true },
-];
+import { Check, Gift, Sparkles, ArrowRight } from "lucide-react";
+import { services, freeCredit } from "@/data/pricing";
 
 const freeFeatures = [
-  "5 free minutes",
+  "1 free minute",
   "Full access to all features",
   "No credit card required",
   "50+ languages",
@@ -71,9 +66,11 @@ export default function PricingTeaser() {
             </div>
             <div className="flex items-baseline gap-1 mb-8">
               <span className="font-[family-name:var(--font-syne)] text-white text-4xl font-bold">
-                5
+                {freeCredit.minutes}
               </span>
-              <span className="text-white/30 text-sm">free minutes</span>
+              <span className="text-white/30 text-sm">
+                free minute{freeCredit.minutes === 1 ? "" : "s"}
+              </span>
             </div>
 
             <ul className="space-y-4 mb-8 flex-1">
@@ -123,30 +120,35 @@ export default function PricingTeaser() {
             </div>
             <div className="flex items-baseline gap-1 mb-8">
               <span className="font-[family-name:var(--font-syne)] text-white text-4xl font-bold">
-                From $0.10
+                From $1.20
               </span>
               <span className="text-white/30 text-sm">/min</span>
             </div>
 
-            <ul className="space-y-4 mb-8 flex-1">
-              {servicePreview.map((s) => (
+            <ul className="space-y-3 mb-8 flex-1">
+              {services.map((s) => (
                 <li
                   key={s.name}
                   className={`flex items-center justify-between text-sm rounded-lg -mx-2 px-2 py-1.5 ${
-                    s.best ? "bg-[#7C3AED]/10 ring-1 ring-[#7C3AED]/20" : ""
+                    s.popular ? "bg-[#7C3AED]/10 ring-1 ring-[#7C3AED]/20" : ""
                   }`}
                 >
                   <div className="flex items-center gap-3 text-white/50">
                     <s.icon className="w-4 h-4 flex-shrink-0 text-[#7C3AED]" />
                     {s.name}
-                    {s.best && (
+                    {s.popular && (
                       <span className="text-[10px] uppercase tracking-wider text-[#F59E0B] font-[family-name:var(--font-syne)]">
                         Best value
                       </span>
                     )}
+                    {s.premium && (
+                      <span className="text-[10px] uppercase tracking-wider text-white/30 font-[family-name:var(--font-syne)]">
+                        Premium
+                      </span>
+                    )}
                   </div>
                   <span className="text-white/70 font-[family-name:var(--font-syne)] font-medium">
-                    {s.price}<span className="text-white/30">/min</span>
+                    {s.pricePerMinute}<span className="text-white/30">/min</span>
                   </span>
                 </li>
               ))}

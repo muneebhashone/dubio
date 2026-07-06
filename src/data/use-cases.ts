@@ -39,16 +39,16 @@ export interface UseCase {
 export const useCases: UseCase[] = [
   {
     slug: "creator-dashboard",
-    title: "YouTube Creator Dashboard",
+    title: "Creator Dashboard",
     shortTitle: "Creator Dashboard",
     icon: "Video",
     stat: "10x",
     statLabel: "Audience Reach",
-    description: "Manage multi-language versions of your videos from one place. See views, status, and performance across every dubbed language.",
+    description: "Manage multi-language versions of your videos from one place. Track dubbed outputs, status, and performance across every language.",
     hero: {
       eyebrow: "For Creators",
       title: "Grow Your Audience 10x",
-      subtitle: "Break language barriers and reach viewers worldwide. Dub your YouTube, TikTok, and Instagram content into 50+ languages while keeping your authentic voice.",
+      subtitle: "Break language barriers and reach viewers worldwide. Upload your videos and dub them into 50+ languages while keeping your authentic voice.",
     },
     painPoints: [
       { title: "Limited Reach", description: "Your content only reaches audiences who speak your language, leaving billions of potential viewers untapped.", icon: "Globe" },
@@ -59,14 +59,14 @@ export const useCases: UseCase[] = [
     solutions: [
       { title: "Voice-Preserved Dubbing", description: "Our AI clones your voice in 50+ languages, keeping your tone, emotion, and personality intact." },
       { title: "One-Click Multi-Language", description: "Upload once, dub into multiple languages simultaneously. Your video is ready in minutes, not weeks." },
-      { title: "YouTube Integration", description: "Paste a YouTube URL and get a dubbed version ready to upload to your multi-language channels." },
+      { title: "Studio Workflow", description: "Upload videos directly to the Dubio studio and manage all your dubbed versions from one dashboard." },
       { title: "Lip Sync Technology", description: "Viewers see your lips match the dubbed audio for a natural viewing experience." },
     ],
     workflow: [
-      { step: 1, title: "Upload Your Video", description: "Upload your video or paste a YouTube URL directly into Dubio." },
+      { step: 1, title: "Upload Your Video", description: "Upload your video file directly into the Dubio studio — MP4, MOV, and more." },
       { step: 2, title: "Choose Languages", description: "Select from 50+ target languages for your content." },
       { step: 3, title: "AI Dubs Your Video", description: "Our AI clones your voice, translates, and syncs everything in minutes." },
-      { step: 4, title: "Publish Globally", description: "Download your dubbed videos and publish to reach new audiences worldwide." },
+      { step: 4, title: "Download & Publish", description: "Download your dubbed videos and publish to reach new audiences worldwide." },
     ],
     stats: [
       { value: "10x", label: "Average audience growth" },
@@ -77,7 +77,7 @@ export const useCases: UseCase[] = [
     testimonial: {
       quote: "Dubio helped me reach viewers in Japan, Brazil, and Germany overnight. My subscriber count has tripled in just two months.",
       name: "Alex Rivera",
-      role: "YouTube Creator, 500K subscribers",
+      role: "Content Creator, 500K subscribers",
     },
   },
   {
@@ -106,7 +106,7 @@ export const useCases: UseCase[] = [
       { title: "Export Flexibility", description: "Download in SRT, VTT, or embed directly. Compatible with every platform." },
     ],
     workflow: [
-      { step: 1, title: "Upload Video", description: "Upload your video or paste a YouTube link." },
+      { step: 1, title: "Upload Video", description: "Upload your video file to Dubio." },
       { step: 2, title: "Select Languages", description: "Choose which languages you need subtitles in." },
       { step: 3, title: "Auto-Generate", description: "AI transcribes, translates, and syncs subtitles in minutes." },
       { step: 4, title: "Export & Embed", description: "Download subtitle files or get a video with burned-in subtitles." },
@@ -130,11 +130,11 @@ export const useCases: UseCase[] = [
     icon: "Globe",
     stat: "3x",
     statLabel: "Platform Reach",
-    description: "Distribute dubbed content across YouTube, TikTok, and Instagram simultaneously. One upload, every platform, every language.",
+    description: "Export dubbed versions of your content ready for YouTube, TikTok, and Instagram. One dub, every platform, every language.",
     hero: {
       eyebrow: "Distribution",
       title: "Publish Everywhere, In Every Language",
-      subtitle: "Dub once, distribute everywhere. Reach audiences on YouTube, TikTok, Instagram, and more — in 50+ languages from a single dashboard.",
+      subtitle: "Dub once, publish everywhere. Download dubbed versions optimized for YouTube, TikTok, Instagram, and more — in 50+ languages.",
     },
     painPoints: [
       { title: "Platform Fragmentation", description: "Each platform has different requirements. Managing multi-language content across all of them is overwhelming.", icon: "Layers" },
@@ -143,20 +143,20 @@ export const useCases: UseCase[] = [
       { title: "Inconsistent Presence", description: "Without multi-language content on every platform, you miss entire markets.", icon: "BarChart" },
     ],
     solutions: [
-      { title: "One-Click Distribution", description: "Dub your video into multiple languages and distribute to all platforms in one step." },
-      { title: "Platform Optimization", description: "Content is automatically formatted for each platform's requirements." },
-      { title: "Simultaneous Launch", description: "Launch in 50+ languages across all platforms at the same time. No more staggered rollouts." },
-      { title: "Performance Tracking", description: "Track views, engagement, and growth across every language and platform from one dashboard." },
+      { title: "Dub Once, Export Everywhere", description: "Dub your video into multiple languages and download versions ready for every platform." },
+      { title: "Platform-Ready Output", description: "Export dubbed videos in formats suited to each platform's requirements." },
+      { title: "Simultaneous Launch", description: "Get all your language versions in one batch, so you can publish everywhere the same day." },
+      { title: "One Workflow", description: "Manage all your dubbed language versions from a single dashboard." },
     ],
     workflow: [
-      { step: 1, title: "Upload Content", description: "Upload your video or connect your YouTube channel." },
-      { step: 2, title: "Select Languages & Platforms", description: "Choose target languages and platforms for distribution." },
-      { step: 3, title: "AI Processes Everything", description: "Dubbing, formatting, and optimization happen in parallel." },
-      { step: 4, title: "Publish Globally", description: "Content goes live across all platforms simultaneously." },
+      { step: 1, title: "Upload Content", description: "Upload your video file to Dubio." },
+      { step: 2, title: "Select Languages", description: "Choose the target languages you want to publish in." },
+      { step: 3, title: "AI Processes Everything", description: "Dubbing and formatting happen in parallel." },
+      { step: 4, title: "Download & Publish", description: "Download dubbed versions and publish to every platform." },
     ],
     stats: [
       { value: "3x", label: "Average platform reach" },
-      { value: "50+", label: "Languages for distribution" },
+      { value: "50+", label: "Languages for dubbing" },
       { value: "Same day", label: "Global launch capability" },
       { value: "1", label: "Dashboard for everything" },
     ],

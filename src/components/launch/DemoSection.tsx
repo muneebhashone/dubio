@@ -175,20 +175,8 @@ export default function DemoSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
         >
           <div className="rounded-2xl overflow-hidden border-b border-white/[0.06] shadow-2xl shadow-purple-900/20">
-            {/* Browser chrome */}
-            <div className="flex items-center gap-2 px-4 py-4 border-b border-white/5 mb-10">
-              <div className="w-4.5 h-4.5 rounded-full bg-white/5" />
-              <div className="w-4.5 h-4.5 rounded-full bg-white/5" />
-              <div className="w-4.5 h-4.5 rounded-full bg-white/5" />
-              <div className="flex-1 mx-3 h-10 rounded-md bg-white/5 flex items-center justify-start pl-8">
-                <span className="text-white/40 text-[11px] md:text-[18px] font-[family-name:var(--font-syne)]">
-                  www.dubio.ai
-                </span>
-              </div>
-            </div>
-
             {/* Video container */}
-            <div className="max-w-5xl mx-auto relative bg-transparent rounded-4xl">
+            <div className="max-w-5xl mx-auto relative bg-transparent rounded-4xl pt-4">
               <video
                 ref={videoRef}
                 className="w-full h-auto cursor-pointer block rounded-4xl mb-8"

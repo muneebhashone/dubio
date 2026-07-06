@@ -10,6 +10,15 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  redirects: async () => {
+    return [
+      {
+        source: "/",
+        destination: "/launch",
+        permanent: false,
+      },
+    ];
+  },
   rewrites: async () => {
     return [
       {
