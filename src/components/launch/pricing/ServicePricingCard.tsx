@@ -19,6 +19,8 @@ export default function ServicePricingCard({ service, index }: ServicePricingCar
       className={`film-frame p-8 relative flex flex-col ${
         service.popular ? "border-[#7C3AED]/40 ring-1 ring-[#7C3AED]/20" : ""
       }`}
+      // .film-frame sets overflow:hidden, which clips the -top-3 badge
+      style={service.popular ? { overflow: "visible" } : undefined}
     >
       {service.popular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
