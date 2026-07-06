@@ -16,7 +16,7 @@ export default function PricingPage() {
       <PageHero
         eyebrow="Pricing"
         title="Pay Only for What You Use"
-        subtitle="Simple per-minute pricing. Start with 5 free minutes. No credit card required."
+        subtitle="Simple per-minute pricing. Start with 1 free minute. No credit card required."
       />
       
 
@@ -40,7 +40,7 @@ export default function PricingPage() {
                 <div>
                   <div className="flex items-center gap-2 mb-1">
                     <h3 className="text-2xl font-bold text-white font-[family-name:var(--font-instrument-serif)] italic">
-                      {freeCredit.minutes} Free Minutes
+                      {freeCredit.minutes} Free Minute{freeCredit.minutes === 1 ? "" : "s"}
                     </h3>
                     <Sparkles className="w-4 h-4 text-[#F59E0B]" />
                   </div>
@@ -69,7 +69,7 @@ export default function PricingPage() {
       {/* Service pricing cards */}
       <section className="py-12">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
             {services.map((service, index) => (
               <ServicePricingCard key={service.name} service={service} index={index} />
             ))}
@@ -93,7 +93,7 @@ export default function PricingPage() {
               Ready to Go Global?
             </h2>
             <p className="text-white/60 mb-8">
-              Start dubbing with 5 free minutes. No credit card required.
+              Start dubbing with your first minute free. No credit card required.
             </p>
             <a
               href={process.env.NEXT_PUBLIC_APP_URL || "https://app.dubio.ai"}

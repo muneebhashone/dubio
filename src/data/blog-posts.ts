@@ -44,7 +44,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "dubio-launch-whats-new",
     title: "Dubio Launch: What's New and What's Coming",
-    excerpt: "We're officially launching Dubio with new features including YouTube integration, multi-speaker support, and more.",
+    excerpt: "We're officially launching Dubio with improved voice cloning, subtitles, and multi-speaker dubbing in early access.",
     category: "Product Updates",
     date: "2026-03-18",
     readTime: "5 min read",
@@ -55,11 +55,11 @@ export const blogPosts: BlogPost[] = [
       <h2>What's New in This Release</h2>
       <p>This launch includes several features our early users have been requesting:</p>
 
-      <h3>YouTube URL Integration</h3>
-      <p>Simply paste a YouTube URL and Dubio will automatically process the video. No need to download, convert, or re-upload. Just paste and dub.</p>
+      <h3>Simple Upload-Based Workflow</h3>
+      <p>Upload your video file and Dubio handles the rest. All major video formats are supported — just upload and dub.</p>
 
       <h3>Multi-Speaker Detection</h3>
-      <p>Our new diarization pipeline automatically detects multiple speakers in your video and applies unique voice cloning to each one. Interviews, podcasts, and panel discussions are now fully supported.</p>
+      <p>Our new diarization pipeline detects multiple speakers in your video and applies unique voice cloning to each one. Multi-speaker dubbing is rolling out as an early-access feature — join the waitlist from the Studio to try it with your interviews, podcasts, and panel discussions.</p>
 
       <h3>Improved Voice Cloning</h3>
       <p>We've upgraded our voice cloning model to achieve 95%+ similarity scores. The new model better preserves emotional nuance, breathing patterns, and natural speech rhythms.</p>
@@ -75,7 +75,7 @@ export const blogPosts: BlogPost[] = [
       <p><strong>Custom Voice Models:</strong> Train custom voice models for consistent brand voices across all your content.</p>
 
       <h2>Getting Started</h2>
-      <p>You can start using Dubio for free today. Every new account gets 5 free minutes to try any service — dubbing, transcription, or both. After that, pay only for what you use, starting at $0.10/min.</p>
+      <p>You can start using Dubio for free today. Every new account gets 1 free minute to try our core services — subtitles, dubbing, or both together. After that, pay only for what you use, starting at $1.20/min.</p>
       <p>We'd love to hear your feedback. Reach out through our contact page or join our community on social media.</p>
     `,
   },

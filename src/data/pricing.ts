@@ -1,4 +1,4 @@
-import { Mic, FileText, Layers, type LucideIcon } from "lucide-react";
+import { Mic, FileText, Layers, ScanFace, Clapperboard, type LucideIcon } from "lucide-react";
 
 export interface PaygService {
   name: string;
@@ -7,6 +7,7 @@ export interface PaygService {
   icon: LucideIcon;
   includes: string[];
   popular?: boolean;
+  premium?: boolean;
 }
 
 export interface FreeCredit {
@@ -16,10 +17,10 @@ export interface FreeCredit {
 }
 
 export const freeCredit: FreeCredit = {
-  minutes: 5,
-  description: "Start dubbing for free. No credit card required.",
+  minutes: 1,
+  description: "Try Dubio with 1 free minute. No credit card required.",
   features: [
-    "Full access to all services",
+    "Available on Subtitle Only, Dubbing Only & Dubbing + Subtitles",
     "50+ languages available",
     "HD quality output",
     "Voice cloning included",
@@ -29,69 +30,93 @@ export const freeCredit: FreeCredit = {
 
 export const services: PaygService[] = [
   {
-    name: "Dubbing",
-    description: "Translate and dub your video into any language with AI voice cloning.",
-    pricePerMinute: "$0.25",
-    icon: Mic,
-    includes: [
-      "Speech recognition",
-      "AI translation",
-      "Voice cloning",
-      "Lip sync",
-      "50+ languages",
-      "HD/4K output",
-    ],
-  },
-  {
-    name: "Transcription",
-    description: "Generate accurate transcripts and subtitles from any video or audio.",
-    pricePerMinute: "$0.10",
+    name: "Subtitle Only",
+    description: "Accurate transcription with translated subtitles for any video or audio.",
+    pricePerMinute: "$1.20",
     icon: FileText,
     includes: [
-      "Speech recognition",
-      "Subtitle generation",
-      "50+ languages",
+      "Accurate transcription",
+      "Translated subtitles",
       "SRT/VTT export",
-      "Speaker detection",
+      "50+ languages",
       "Timestamps",
     ],
   },
   {
-    name: "Dubbing + Transcription",
-    description: "Full package: dub your video and get synced subtitles in one step.",
-    pricePerMinute: "$0.30",
+    name: "Dubbing Only",
+    description: "Translate and dub your video into any language with AI voice cloning.",
+    pricePerMinute: "$2.90",
+    icon: Mic,
+    includes: [
+      "AI voice-cloned dubbing",
+      "Speech recognition",
+      "AI translation",
+      "50+ languages",
+      "HD output",
+    ],
+  },
+  {
+    name: "Dubbing + Subtitles",
+    description: "Everything in Dubbing plus synced subtitle files in one step.",
+    pricePerMinute: "$3.50",
     icon: Layers,
     includes: [
-      "Everything in Dubbing",
-      "Everything in Transcription",
-      "Synced subtitles",
-      "Voice cloning",
-      "Lip sync",
+      "Everything in Dubbing Only",
+      "Synced subtitle files",
+      "SRT/VTT export",
+      "50+ languages",
       "Best value",
     ],
     popular: true,
+  },
+  {
+    name: "Dubbing + Lip Sync",
+    description:
+      "Dubbing with realistic lip synchronization. Premium tier — requires Dubio Balance (not free-trial eligible).",
+    pricePerMinute: "$7.50",
+    icon: ScanFace,
+    includes: [
+      "Everything in Dubbing Only",
+      "Realistic lip synchronization",
+      "50+ languages",
+      "HD output",
+      "Requires Dubio Balance",
+    ],
+    premium: true,
+  },
+  {
+    name: "Full Studio",
+    description:
+      "Dubbing + lip sync + subtitles — the complete package. Premium tier — requires Dubio Balance (not free-trial eligible).",
+    pricePerMinute: "$8.00",
+    icon: Clapperboard,
+    includes: [
+      "Everything in Dubbing + Lip Sync",
+      "Synced subtitle files",
+      "SRT/VTT export",
+      "The complete package",
+      "Requires Dubio Balance",
+    ],
+    premium: true,
   },
 ];
 
 export interface ServiceComparisonFeature {
   name: string;
-  dubbing: boolean;
-  transcription: boolean;
-  bundle: boolean;
+  values: [boolean, boolean, boolean, boolean, boolean];
 }
 
 export const serviceComparisonFeatures: ServiceComparisonFeature[] = [
-  { name: "Speech recognition", dubbing: true, transcription: true, bundle: true },
-  { name: "AI translation", dubbing: true, transcription: false, bundle: true },
-  { name: "Voice cloning", dubbing: true, transcription: false, bundle: true },
-  { name: "Lip sync", dubbing: true, transcription: false, bundle: true },
-  { name: "Subtitle generation", dubbing: false, transcription: true, bundle: true },
-  { name: "SRT/VTT export", dubbing: false, transcription: true, bundle: true },
-  { name: "Speaker detection", dubbing: true, transcription: true, bundle: true },
-  { name: "50+ languages", dubbing: true, transcription: true, bundle: true },
-  { name: "HD/4K output", dubbing: true, transcription: false, bundle: true },
-  { name: "YouTube integration", dubbing: true, transcription: true, bundle: true },
-  { name: "API access", dubbing: true, transcription: true, bundle: true },
+  { name: "Speech recognition", values: [true, true, true, true, true] },
+  { name: "AI translation", values: [true, true, true, true, true] },
+  { name: "Voice cloning", values: [false, true, true, true, true] },
+  { name: "Lip sync", values: [false, false, false, true, true] },
+  { name: "Subtitle generation", values: [true, false, true, false, true] },
+  { name: "SRT/VTT export", values: [true, false, true, false, true] },
+  { name: "Timestamps", values: [true, false, true, false, true] },
+  { name: "50+ languages", values: [true, true, true, true, true] },
+  { name: "HD output", values: [false, true, true, true, true] },
+  { name: "Free trial eligible", values: [true, true, true, false, false] },
 ];
 
 export const pricingFAQs = [
@@ -101,14 +126,19 @@ export const pricingFAQs = [
       "You only pay for what you use. Each service is billed per minute of video processed. There are no monthly fees, no commitments, and no minimum usage requirements.",
   },
   {
-    question: "Do I get free minutes to start?",
+    question: "Do I get a free minute to start?",
     answer:
-      "Yes! Every new account gets 5 free minutes to try any service. No credit card required. Use them for dubbing, transcription, or both.",
+      "Yes! Every new account gets 1 free minute to try Subtitle Only, Dubbing Only, or Dubbing + Subtitles. No credit card required.",
   },
   {
     question: "What counts as a minute?",
     answer:
       "Billing is based on the duration of your input video, rounded up to the nearest minute. A 90-second video counts as 2 minutes. Processing the same video into multiple languages counts separately for each language.",
+  },
+  {
+    question: "What are the premium tiers?",
+    answer:
+      "Dubbing + Lip Sync and Full Studio are premium tiers that include realistic lip synchronization. They require topping up your Dubio Balance and are not free-trial eligible.",
   },
   {
     question: "Are there volume discounts?",
@@ -131,8 +161,8 @@ export const pricingFAQs = [
       "Yes, we offer custom enterprise plans with volume discounts, dedicated support, SLA guarantees, SSO, and custom API integrations. Contact our sales team to learn more.",
   },
   {
-    question: "Do unused free minutes expire?",
+    question: "Does my unused free minute expire?",
     answer:
-      "No, your 5 free minutes never expire. Use them whenever you're ready. Once used, additional minutes are billed at the per-minute rate for each service.",
+      "No, your free minute never expires. Use it whenever you're ready. Once used, additional minutes are billed at the per-minute rate for each service.",
   },
 ];
