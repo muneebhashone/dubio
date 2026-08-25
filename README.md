@@ -64,11 +64,7 @@ npm install
 
 ### Environment variables
 
-Copy the sample file and fill in your values:
-
-```bash
-cp .env.sample .env.local
-```
+Store these values under `/dubio--web` in Infisical; the npm scripts inject them.
 
 | Variable | Description |
 | --- | --- |
