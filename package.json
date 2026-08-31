@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "start:local": "infisical run --projectId=98ac6ff9-be43-46a1-8fbf-131e217bccd3 --env=${INFISICAL_ENV:-dev} --path=/dubio--web -- next dev --turbopack",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
